@@ -36,6 +36,7 @@ let currentQuestionIndex = 0;
 let score = 0;
 let bestScore = loadFromLocalStorage("bestScore", 0);
 let timerId = null;
+let shuffledQuestions = [];
 
 // DOM Elements
 const introScreen = getElement("#intro-screen");
@@ -64,6 +65,13 @@ restartBtn.addEventListener("click", restartQuiz);
 
 setText(bestScoreValue, bestScore);
 
+// Fonction pour mélanger les questions
+function shuffleQuestions(questionsArray) {
+  const copy = [...questionsArray];
+  copy.sort(() => Math.random() - 0.5);
+  return copy;
+}
+
 function startQuiz() {
   hideElement(introScreen);
   showElement(questionScreen);
@@ -71,7 +79,9 @@ function startQuiz() {
   currentQuestionIndex = 0;
   score = 0;
 
-  setText(totalQuestionsSpan, questions.length);
+  shuffledQuestions = shuffleQuestions(questions);
+  
+  setText(totalQuestionsSpan, shuffledQuestions.length);
 
   showQuestion();
 }
@@ -79,7 +89,8 @@ function startQuiz() {
 function showQuestion() {
   clearInterval(timerId);
 
-  const q = questions[currentQuestionIndex];
+  const q = shuffledQuestions[currentQuestionIndex];
+  
   setText(questionText, q.text);
   setText(currentQuestionIndexSpan, currentQuestionIndex + 1);
 
@@ -105,7 +116,8 @@ function showQuestion() {
 function selectAnswer(index, btn) {
   clearInterval(timerId);
 
-  const q = questions[currentQuestionIndex];
+  const q = shuffledQuestions[currentQuestionIndex];
+  
   if (index === q.correct) {
     score++;
     btn.classList.add("correct");
@@ -120,7 +132,8 @@ function selectAnswer(index, btn) {
 
 function nextQuestion() {
   currentQuestionIndex++;
-  if (currentQuestionIndex < questions.length) {
+  
+  if (currentQuestionIndex < shuffledQuestions.length) {
     showQuestion();
   } else {
     endQuiz();
@@ -131,7 +144,7 @@ function endQuiz() {
   hideElement(questionScreen);
   showElement(resultScreen);
 
-  updateScoreDisplay(scoreText, score, questions.length);
+  updateScoreDisplay(scoreText, score, shuffledQuestions.length);
 
   if (score > bestScore) {
     bestScore = score;
