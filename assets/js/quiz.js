@@ -159,8 +159,9 @@ function startQuiz() {
 function showQuestion() {
   clearInterval(timerId);
   const mode = getSelectedMode();
+  console.log(mode === "classic" ? currentQuestionIndex : Math.floor(Math.random() * shuffledQuestions.length))
   const q = shuffledQuestions[mode === "classic" ? currentQuestionIndex : Math.floor(Math.random() * shuffledQuestions.length)];
-
+  console.log(q)
   setText(questionText, q.text);
   setText(currentQuestionIndexSpan, currentQuestionIndex + 1);
 
@@ -206,7 +207,7 @@ function selectAnswer(index, btn) {
   }
 
   userAnswers.push({
-    questionText: q.text,
+    questionText: q.texgitt,
     userAnswerText: q.answers[index],
     correctAnswerText: q.answers[q.correct],
     isCorrect: isCorrect
