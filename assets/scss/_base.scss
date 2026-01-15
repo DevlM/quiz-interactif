@@ -1,0 +1,23 @@
+@use 'variables' as *;
+
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  margin: 20px;
+  text-align: center;
+  background: $bg-light;
+  color: $text-dark;
+}
+
+h1 {
+  margin-bottom: 25px;
+}
+
+.notice {
+  font-style: italic;
+  margin-bottom: 15px;
+  color: $text-gray;
+}
+
+.hidden {
+  display: none;
+}
