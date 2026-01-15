@@ -71,17 +71,20 @@ button:hover {
 }
 
 .correct {
-  background-color: #c8e6c9 !important; /* vert clair */
+  background-color: #c8e6c9 !important;
+  /* vert clair */
 }
 
 .wrong {
-  background-color: #ffcdd2 !important; /* rouge clair */
+  background-color: #ffcdd2 !important;
+  /* rouge clair */
 }
 
 #timer-div {
   margin-top: 10px;
   font-weight: bold;
-  color: #d32f2f; /* rouge foncé */
+  color: #d32f2f;
+  /* rouge foncé */
 }
 
 #global-timer-div {
@@ -98,7 +101,8 @@ button:hover {
 
 #result-screen h2 {
   margin-bottom: 20px;
-  color: #2e7d32; /* vert foncé */
+  color: #2e7d32;
+  /* vert foncé */
 }
 
 #score-text {
@@ -248,4 +252,73 @@ button:hover {
 
 .badge:hover {
   transform: scale(1.1);
+}
+
+/* Badges */
+#badges-section {
+  margin-top: 20px;
+  padding: 10px;
+  background: #f0f4c3;
+  border-radius: 8px;
+}
+
+#badges-container {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.badge {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #e0e0e0;
+  color: #616161;
+  font-size: 0.8em;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: transform 0.2s;
+}
+
+.badge.unlocked {
+  background: #fff9c4;
+  color: #333;
+  border: 2px solid #fbc02d;
+}
+
+.badge span {
+  font-size: 1.5em;
+  display: block;
+}
+
+.badge p {
+  margin: 2px 0 0 0;
+  font-weight: bold;
+}
+
+.badge:hover {
+  transform: scale(1.1);
+}
+
+
+.dark {
+  color: #fafafa !important;
+  background: #333 !important;
+}
+
+.dark #intro-screen,
+.dark #question-screen,
+.dark #result-screen {
+  color: white;
+  background: rgb(29, 29, 29);
+}
+
+.dark #answers button {
+  color: white;
+  background: #333;
 }

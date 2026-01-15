@@ -14,6 +14,10 @@ import {
   saveToLocalStorage,
   startTimer,
 } from "./utils.js";
+import {
+  toggledarkmode,
+} from "./dark-mode.js";
+
 
 console.log("Quiz JS loaded...");
 
@@ -46,7 +50,7 @@ const themes = {
       timeLimit: 15,
     },
   ],
-    "français": [
+  "français": [
     {
       text: "Comment est conjuger le verbe avoir au futur ?",
       answers: ["aurai", "aie", "ai", "a"],
@@ -60,7 +64,7 @@ const themes = {
       timeLimit: 15,
     },
   ],
-    "histoire": [
+  "histoire": [
     {
       text: "Quelle est la date de la Révolution française ?",
       answers: ["1789", "1791", "1793", "1795"],
@@ -132,6 +136,7 @@ nextBtn.addEventListener("click", nextQuestion);
 restartBtn.addEventListener("click", restartQuiz);
 endBtn.addEventListener("click", endQuiz);
 
+
 setText(bestScoreValue, bestScore);
 displayBadges();
 
@@ -163,7 +168,7 @@ function startQuiz() {
   if (mode === "infinite" || mode === "contre-la-montre") {
     showElement(endBtn);
   }
-  
+
   setText(totalQuestionsSpan, mode === "classic" ? shuffledQuestions.length : "Infini");
 
   if (mode === "contre-la-montre") {
@@ -216,7 +221,7 @@ function showQuestion() {
         questionText: q.text,
         userAnswerText: "Pas de réponse (temps écoulé)",
         correctAnswerText: q.answers[q.correct],
-        isCorrect: false 
+        isCorrect: false
       });
       markCorrectAnswer(answersDiv, q.correct);
       lockAnswers(answersDiv);
@@ -229,7 +234,7 @@ function selectAnswer(index, btn, q) {
   clearInterval(timerId);
   
   const isCorrect = index === q.correct;
-  
+
   if (isCorrect) {
     score++;
     btn.classList.add("correct");
@@ -238,7 +243,7 @@ function selectAnswer(index, btn, q) {
   }
 
   userAnswers.push({
-    questionText: q.text,
+    questionText: q.texgitt,
     userAnswerText: q.answers[index],
     correctAnswerText: q.answers[q.correct],
     isCorrect: isCorrect
@@ -365,7 +370,7 @@ function showRecapTable() {
     resultCell.textContent = answer.isCorrect ? "✅" : "❌";
     resultCell.className = "result-icon";
     row.appendChild(resultCell);
-    
+
     recapTbody.appendChild(row);
   }
 }
@@ -386,3 +391,10 @@ const modeSelect = getElement("#mode-select");
 function getSelectedMode() {
   return modeSelect.value;
 }
+const button = document.querySelector("button")
+
+function changemode() {
+  button.addEventListener("click", toggledarkmode)
+
+}
+changemode();
