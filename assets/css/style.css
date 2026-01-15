@@ -84,6 +84,12 @@ button:hover {
   color: #d32f2f; /* rouge foncé */
 }
 
+#global-timer-div {
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: #f57c00; /* orange foncé */
+}
+
 #progress {
   font-weight: bold;
   margin-bottom: 10px;

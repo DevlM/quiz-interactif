@@ -78,6 +78,7 @@ const themes = {
 
 let questions = [];
 let selectedTheme = "";
+let selectedMode = "";
 
 let currentQuestionIndex = 0;
 let score = 0;
@@ -85,6 +86,8 @@ let bestScore = loadFromLocalStorage("bestScore", 0);
 let badgesUnlocked = loadFromLocalStorage("badgesUnlocked", []);
 let totalCorrectAnswers = loadFromLocalStorage("totalCorrectAnswers", 0);
 let timerId = null;
+let globalTimerId = null;
+let globalTimeLeft = 0;
 let userAnswers = [];
 let shuffledQuestions = [];
 
@@ -114,6 +117,8 @@ const endBtn = getElement("#end-btn");
 
 const scoreText = getElement("#score-text");
 const timeLeftSpan = getElement("#time-left");
+const globalTimeLeftSpan = getElement("#global-time-left");
+const globalTimerDiv = getElement("#global-timer-div");
 
 const currentQuestionIndexSpan = getElement("#current-question-index");
 const totalQuestionsSpan = getElement("#total-questions");
@@ -138,6 +143,8 @@ function shuffleQuestions(questionsArray) {
 }
 
 function startQuiz() {
+  clearInterval(globalTimerId);
+
   selectedTheme = themeSelect.value;
   questions = themes[selectedTheme];
 
@@ -151,12 +158,30 @@ function startQuiz() {
   shuffledQuestions = shuffleQuestions(questions);
 
   const mode = getSelectedMode();
+  selectedMode = mode;
 
-  if (mode === "infinite") {
+  if (mode === "infinite" || mode === "contre-la-montre") {
     showElement(endBtn);
   }
   
   setText(totalQuestionsSpan, mode === "classic" ? shuffledQuestions.length : "Infini");
+
+  if (mode === "contre-la-montre") {
+    showElement(globalTimerDiv);
+    globalTimeLeft = 60; // Temps global de 60 secondes
+    setText(globalTimeLeftSpan, globalTimeLeft);
+
+    globalTimerId = setInterval(() => {
+      globalTimeLeft--;
+      setText(globalTimeLeftSpan, globalTimeLeft);
+      if (globalTimeLeft <= 0) {
+        clearInterval(globalTimerId);
+        endQuiz();
+      }
+    }, 1000);
+  } else {
+    hideElement(globalTimerDiv);
+  }
 
   showQuestion();
 }
@@ -233,17 +258,21 @@ function nextQuestion() {
     } else {
       endQuiz();
     }
-  } else if (mode === "infinite") {
-    currentQuestionIndex++;
+  } else if (mode === "infinite" || mode === "contre-la-montre") {
+    currentQuestionIndex = Math.floor(Math.random() * shuffledQuestions.length);
     showQuestion();
   }
 }
 
 function endQuiz() {
+  clearInterval(globalTimerId);
+  clearInterval(timerId);
+
   hideElement(questionScreen);
   showElement(resultScreen);
 
-  updateScoreDisplay(scoreText, score, shuffledQuestions.length);
+  const total = selectedMode === "classic" ? shuffledQuestions.length : userAnswers.length;
+  updateScoreDisplay(scoreText, score, total);
 
   if (score > bestScore) {
     bestScore = score;
@@ -342,6 +371,9 @@ function showRecapTable() {
 }
 
 function restartQuiz() {
+  clearInterval(globalTimerId);
+  clearInterval(timerId);
+
   hideElement(resultScreen);
   showElement(introScreen);
 
