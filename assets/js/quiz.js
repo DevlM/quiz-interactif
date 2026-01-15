@@ -50,7 +50,7 @@ const themes = {
       timeLimit: 15,
     },
   ],
-    "français": [
+  "français": [
     {
       text: "Comment est conjuger le verbe avoir au futur ?",
       answers: ["aurai", "aie", "ai", "a"],
@@ -64,7 +64,7 @@ const themes = {
       timeLimit: 15,
     },
   ],
-    "histoire": [
+  "histoire": [
     {
       text: "Quelle est la date de la Révolution française ?",
       answers: ["1789", "1791", "1793", "1795"],
@@ -150,7 +150,7 @@ function startQuiz() {
   if (mode === "infinite") {
     showElement(endBtn);
   }
-  
+
   setText(totalQuestionsSpan, mode === "classic" ? shuffledQuestions.length : "Infini");
 
   showQuestion();
@@ -158,9 +158,9 @@ function startQuiz() {
 
 function showQuestion() {
   clearInterval(timerId);
- const mode = getSelectedMode();
+  const mode = getSelectedMode();
   const q = shuffledQuestions[mode === "classic" ? currentQuestionIndex : Math.floor(Math.random() * shuffledQuestions.length)];
-  
+
   setText(questionText, q.text);
   setText(currentQuestionIndexSpan, currentQuestionIndex + 1);
 
@@ -177,12 +177,12 @@ function showQuestion() {
     q.timeLimit,
     (timeLeft) => setText(timeLeftSpan, timeLeft),
     () => {
-     const q = shuffledQuestions[currentQuestionIndex];
+      const q = shuffledQuestions[currentQuestionIndex];
       userAnswers.push({
         questionText: q.text,
         userAnswerText: "Pas de réponse (temps écoulé)",
         correctAnswerText: q.answers[q.correct],
-        isCorrect: false 
+        isCorrect: false
       });
       markCorrectAnswer(answersDiv, q.correct);
       lockAnswers(answersDiv);
@@ -194,10 +194,10 @@ function showQuestion() {
 function selectAnswer(index, btn) {
   clearInterval(timerId);
 
- const q = shuffledQuestions[currentQuestionIndex];
-  
+  const q = shuffledQuestions[currentQuestionIndex];
+
   const isCorrect = index === q.correct;
-  
+
   if (isCorrect) {
     score++;
     btn.classList.add("correct");
@@ -220,7 +220,7 @@ function selectAnswer(index, btn) {
 function nextQuestion() {
   const mode = getSelectedMode();
   if (mode === "classic" && currentQuestionIndex < shuffledQuestions.length) {
-      currentQuestionIndex++;
+    currentQuestionIndex++;
     showQuestion();
   } else if (mode === "infinite") {
     currentQuestionIndex = Math.floor(Math.random() * shuffledQuestions.length);
@@ -247,7 +247,7 @@ function endQuiz() {
 
 function showRecapTable() {
   recapTbody.innerHTML = "";
-  
+
   userAnswers.forEach((answer) => {
     const row = document.createElement("tr");
     row.className = answer.isCorrect ? "recap-row-correct" : "recap-row-wrong";
@@ -270,7 +270,7 @@ function showRecapTable() {
     resultCell.textContent = answer.isCorrect ? "✅" : "❌";
     resultCell.className = "result-icon";
     row.appendChild(resultCell);
-    
+
     recapTbody.appendChild(row);
   });
 }
@@ -287,3 +287,10 @@ const modeSelect = getElement("#mode-select");
 function getSelectedMode() {
   return modeSelect.value;
 }
+const button = document.querySelector("button")
+
+function changemode() {
+  button.addEventListener("click", toggledarkmode)
+
+}
+changemode();
