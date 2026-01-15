@@ -14,6 +14,10 @@ import {
   saveToLocalStorage,
   startTimer,
 } from "./utils.js";
+import {
+  toggledarkmode,
+} from "./dark-mode.js";
+
 
 console.log("Quiz JS loaded...");
 
@@ -31,7 +35,7 @@ const questions = [
     timeLimit: 5,
   },
 ];
-
+let button = document.querySelector("button");
 let currentQuestionIndex = 0;
 let score = 0;
 let bestScore = loadFromLocalStorage("bestScore", 0);
@@ -61,6 +65,7 @@ const totalQuestionsSpan = getElement("#total-questions");
 startBtn.addEventListener("click", startQuiz);
 nextBtn.addEventListener("click", nextQuestion);
 restartBtn.addEventListener("click", restartQuiz);
+
 
 setText(bestScoreValue, bestScore);
 
@@ -146,3 +151,7 @@ function restartQuiz() {
 
   setText(bestScoreValue, bestScore);
 }
+function change_dark_mode() {
+  button.addEventListener("click", toggledarkmode)
+}
+change_dark_mode();

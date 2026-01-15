@@ -61,17 +61,20 @@ button:hover {
 }
 
 .correct {
-  background-color: #c8e6c9 !important; /* vert clair */
+  background-color: #c8e6c9 !important;
+  /* vert clair */
 }
 
 .wrong {
-  background-color: #ffcdd2 !important; /* rouge clair */
+  background-color: #ffcdd2 !important;
+  /* rouge clair */
 }
 
 #timer-div {
   margin-top: 10px;
   font-weight: bold;
-  color: #d32f2f; /* rouge foncé */
+  color: #d32f2f;
+  /* rouge foncé */
 }
 
 #progress {
@@ -82,10 +85,29 @@ button:hover {
 
 #result-screen h2 {
   margin-bottom: 20px;
-  color: #2e7d32; /* vert foncé */
+  color: #2e7d32;
+  /* vert foncé */
 }
 
 #score-text {
   font-size: 1.2em;
   margin-bottom: 10px;
+}
+
+
+.dark {
+  color: #fafafa !important;
+  background: #333 !important;
+}
+
+.dark #intro-screen,
+.dark #question-screen,
+.dark #result-screen {
+  color: white;
+  background: rgb(29, 29, 29);
+}
+
+.dark #answers button {
+  color: white;
+  background: #333;
 }
