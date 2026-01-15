@@ -103,6 +103,7 @@ const answersDiv = getElement("#answers");
 const nextBtn = getElement("#next-btn");
 const startBtn = getElement("#start-btn");
 const restartBtn = getElement("#restart-btn");
+const endBtn = getElement("#end-btn");
 
 const scoreText = getElement("#score-text");
 const timeLeftSpan = getElement("#time-left");
@@ -118,6 +119,7 @@ const recapTbody = getElement("#recap-tbody");
 startBtn.addEventListener("click", startQuiz);
 nextBtn.addEventListener("click", nextQuestion);
 restartBtn.addEventListener("click", restartQuiz);
+endBtn.addEventListener("click", endQuiz);
 
 setText(bestScoreValue, bestScore);
 
@@ -142,8 +144,14 @@ function startQuiz() {
   userAnswers = [];
 
   shuffledQuestions = shuffleQuestions(questions);
+
+  const mode = getSelectedMode();
+
+  if (mode === "infinite") {
+    showElement(endBtn);
+  }
   
-  setText(totalQuestionsSpan, shuffledQuestions.length);
+  setText(totalQuestionsSpan, mode === "classic" ? shuffledQuestions.length : "Infini");
 
   globalTimeLeft = 60; // Temps global de 60 secondes
   setText(globalTimeLeftSpan, globalTimeLeft);
@@ -162,8 +170,8 @@ function startQuiz() {
 
 function showQuestion() {
   clearInterval(timerId);
-
-  const q = shuffledQuestions[currentQuestionIndex];
+ const mode = getSelectedMode();
+  const q = shuffledQuestions[mode === "classic" ? currentQuestionIndex : Math.floor(Math.random() * shuffledQuestions.length)];
   
   setText(questionText, q.text);
   setText(currentQuestionIndexSpan, currentQuestionIndex + 1);
@@ -222,9 +230,12 @@ function selectAnswer(index, btn) {
 }
 
 function nextQuestion() {
-  currentQuestionIndex++;
-  
-  if (currentQuestionIndex < shuffledQuestions.length) {
+  const mode = getSelectedMode();
+  if (mode === "classic" && currentQuestionIndex < shuffledQuestions.length) {
+      currentQuestionIndex++;
+    showQuestion();
+  } else if (mode === "infinite") {
+    currentQuestionIndex = Math.floor(Math.random() * shuffledQuestions.length);
     showQuestion();
   } else {
     endQuiz();
@@ -287,4 +298,10 @@ function restartQuiz() {
   showElement(introScreen);
 
   setText(bestScoreValue, bestScore);
+}
+
+const modeSelect = getElement("#mode-select");
+
+function getSelectedMode() {
+  return modeSelect.value;
 }

@@ -21,6 +21,10 @@
       </select>
       <p>Meilleur score : <span id="best-score-value">0</span></p>
       <button id="start-btn">Commencer le quiz</button>
+      <select id="mode-select">
+        <option value="classic">Mode Classique</option>
+        <option value="infinite">Mode Infini</option>
+      </select>
     </div>
 
     <div id="question-screen" style="display: none">
@@ -33,6 +37,7 @@
       <div id="answers"></div>
       <div id="timer-div">Temps restant : <span id="time-left">0</span>s</div>
       <button id="next-btn" class="hidden">Question suivante</button>
+      <button id="end-btn" class="hidden">Terminer le quiz</button>
     </div>
 
     <div id="result-screen" style="display: none">
