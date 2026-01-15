@@ -21,23 +21,6 @@ import {
 
 console.log("Quiz JS loaded...");
 
-<<<<<<< HEAD
-const questions = [
-  {
-    text: "Quelle est la capitale de la France ?",
-    answers: ["Marseille", "Paris", "Lyon", "Bordeaux"],
-    correct: 1,
-    timeLimit: 10,
-  },
-  {
-    text: "Combien font 2 + 3 ?",
-    answers: ["3", "4", "5", "1"],
-    correct: 2,
-    timeLimit: 5,
-  },
-];
-let button = document.querySelector("button");
-=======
 const themes = {
   "maths": [
     {
@@ -100,7 +83,6 @@ const themes = {
 let questions = [];
 let selectedTheme = "";
 
->>>>>>> develop
 let currentQuestionIndex = 0;
 let score = 0;
 let bestScore = loadFromLocalStorage("bestScore", 0);
@@ -299,16 +281,9 @@ function restartQuiz() {
 
   setText(bestScoreValue, bestScore);
 }
-<<<<<<< HEAD
-function change_dark_mode() {
-  button.addEventListener("click", toggledarkmode)
-}
-change_dark_mode();
-=======
 
 const modeSelect = getElement("#mode-select");
 
 function getSelectedMode() {
   return modeSelect.value;
 }
->>>>>>> develop
