@@ -173,7 +173,7 @@ function startQuiz() {
 
   if (mode === "contre-la-montre") {
     showElement(globalTimerDiv);
-    globalTimeLeft = 60; // Temps global de 60 secondes
+    globalTimeLeft = 60; 
     setText(globalTimeLeftSpan, globalTimeLeft);
 
     globalTimerId = setInterval(() => {
@@ -207,7 +207,6 @@ function showQuestion() {
     const btn = createAnswerButton(answer, () => selectAnswer(index, btn, q));
 
     answersDiv.appendChild(btn);
-    index++;
   });
 
   nextBtn.classList.add("hidden");
@@ -243,7 +242,7 @@ function selectAnswer(index, btn, q) {
   }
 
   userAnswers.push({
-    questionText: q.texgitt,
+    questionText: q.text,
     userAnswerText: q.answers[index],
     correctAnswerText: q.answers[q.correct],
     isCorrect: isCorrect
