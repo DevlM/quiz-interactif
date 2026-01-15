@@ -37,6 +37,7 @@ let score = 0;
 let bestScore = loadFromLocalStorage("bestScore", 0);
 let timerId = null;
 let userAnswers = [];
+let shuffledQuestions = [];
 
 // DOM Elements
 const introScreen = getElement("#intro-screen");
@@ -68,6 +69,13 @@ restartBtn.addEventListener("click", restartQuiz);
 
 setText(bestScoreValue, bestScore);
 
+// Fonction pour mélanger les questions
+function shuffleQuestions(questionsArray) {
+  const copy = [...questionsArray];
+  copy.sort(() => Math.random() - 0.5);
+  return copy;
+}
+
 function startQuiz() {
   hideElement(introScreen);
   showElement(questionScreen);
@@ -76,7 +84,9 @@ function startQuiz() {
   score = 0;
   userAnswers = [];
 
-  setText(totalQuestionsSpan, questions.length);
+  shuffledQuestions = shuffleQuestions(questions);
+  
+  setText(totalQuestionsSpan, shuffledQuestions.length);
 
   showQuestion();
 }
@@ -84,7 +94,8 @@ function startQuiz() {
 function showQuestion() {
   clearInterval(timerId);
 
-  const q = questions[currentQuestionIndex];
+  const q = shuffledQuestions[currentQuestionIndex];
+  
   setText(questionText, q.text);
   setText(currentQuestionIndexSpan, currentQuestionIndex + 1);
 
@@ -101,12 +112,12 @@ function showQuestion() {
     q.timeLimit,
     (timeLeft) => setText(timeLeftSpan, timeLeft),
     () => {
-      const q = questions[currentQuestionIndex];
+     const q = shuffledQuestions[currentQuestionIndex];
       userAnswers.push({
         questionText: q.text,
         userAnswerText: "Pas de réponse (temps écoulé)",
         correctAnswerText: q.answers[q.correct],
-        isCorrect: false // ✅ Ajouté
+        isCorrect: false 
       });
       markCorrectAnswer(answersDiv, q.correct);
       lockAnswers(answersDiv);
@@ -118,7 +129,7 @@ function showQuestion() {
 function selectAnswer(index, btn) {
   clearInterval(timerId);
 
-  const q = questions[currentQuestionIndex];
+ const q = shuffledQuestions[currentQuestionIndex];
   
   const isCorrect = index === q.correct;
   
@@ -143,7 +154,8 @@ function selectAnswer(index, btn) {
 
 function nextQuestion() {
   currentQuestionIndex++;
-  if (currentQuestionIndex < questions.length) {
+  
+  if (currentQuestionIndex < shuffledQuestions.length) {
     showQuestion();
   } else {
     endQuiz();
@@ -154,7 +166,7 @@ function endQuiz() {
   hideElement(questionScreen);
   showElement(resultScreen);
 
-  updateScoreDisplay(scoreText, score, questions.length);
+  updateScoreDisplay(scoreText, score, shuffledQuestions.length);
 
   if (score > bestScore) {
     bestScore = score;
