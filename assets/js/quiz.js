@@ -17,20 +17,67 @@ import {
 
 console.log("Quiz JS loaded...");
 
-const questions = [
-  {
-    text: "Quelle est la capitale de la France ?",
-    answers: ["Marseille", "Paris", "Lyon", "Bordeaux"],
-    correct: 1,
-    timeLimit: 10,
-  },
-  {
-    text: "Combien font 2 + 3 ?",
-    answers: ["3", "4", "5", "1"],
-    correct: 2,
-    timeLimit: 5,
-  },
-];
+const themes = {
+  "maths": [
+    {
+      text: "Combien font 2 + 3 ?",
+      answers: ["3", "4", "5", "1"],
+      correct: 2,
+      timeLimit: 5,
+    },
+    {
+      text: "Quelle est la racine carrée de 16 ?",
+      answers: ["2", "4", "8", "16"],
+      correct: 1,
+      timeLimit: 10,
+    },
+  ],
+  "culture-generale": [
+    {
+      text: "Quelle est la capitale de la France ?",
+      answers: ["Marseille", "Paris", "Lyon", "Bordeaux"],
+      correct: 1,
+      timeLimit: 10,
+    },
+    {
+      text: "Quel est le plus grand océan du monde ?",
+      answers: ["Atlantique", "Indien", "Arctique", "Pacifique"],
+      correct: 3,
+      timeLimit: 15,
+    },
+  ],
+    "français": [
+    {
+      text: "Comment est conjuger le verbe avoir au futur ?",
+      answers: ["aurai", "aie", "ai", "a"],
+      correct: 0,
+      timeLimit: 10,
+    },
+    {
+      text: "Comment est conjuger le verbe être au futur ?",
+      answers: ["serai", "sois", "suis", "être"],
+      correct: 0,
+      timeLimit: 15,
+    },
+  ],
+    "histoire": [
+    {
+      text: "Quelle est la date de la Révolution française ?",
+      answers: ["1789", "1791", "1793", "1795"],
+      correct: 0,
+      timeLimit: 10,
+    },
+    {
+      text: "Quel est le nom du roi soleil ?",
+      answers: ["Louis XIV", "Louis XV", "Louis XVI", "Napoleon"],
+      correct: 0,
+      timeLimit: 15,
+    },
+  ],
+};
+
+let questions = [];
+let selectedTheme = "";
 
 let currentQuestionIndex = 0;
 let score = 0;
@@ -46,6 +93,8 @@ const resultScreen = getElement("#result-screen");
 
 const bestScoreValue = getElement("#best-score-value");
 const bestScoreEnd = getElement("#best-score-end");
+
+const themeSelect = getElement("#theme-select");
 
 const questionText = getElement("#question-text");
 const answersDiv = getElement("#answers");
@@ -79,6 +128,9 @@ function shuffleQuestions(questionsArray) {
 }
 
 function startQuiz() {
+  selectedTheme = themeSelect.value;
+  questions = themes[selectedTheme];
+
   hideElement(introScreen);
   showElement(questionScreen);
 
