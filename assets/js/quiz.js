@@ -83,6 +83,8 @@ let currentQuestionIndex = 0;
 let score = 0;
 let bestScore = loadFromLocalStorage("bestScore", 0);
 let timerId = null;
+let userAnswers = [];
+let shuffledQuestions = [];
 
 // DOM Elements
 const introScreen = getElement("#intro-screen");
@@ -106,12 +108,22 @@ const timeLeftSpan = getElement("#time-left");
 const currentQuestionIndexSpan = getElement("#current-question-index");
 const totalQuestionsSpan = getElement("#total-questions");
 
+const recapSection = getElement("#recap-section");
+const recapTbody = getElement("#recap-tbody");
+
 // Init
 startBtn.addEventListener("click", startQuiz);
 nextBtn.addEventListener("click", nextQuestion);
 restartBtn.addEventListener("click", restartQuiz);
 
 setText(bestScoreValue, bestScore);
+
+// Fonction pour mélanger les questions
+function shuffleQuestions(questionsArray) {
+  const copy = [...questionsArray];
+  copy.sort(() => Math.random() - 0.5);
+  return copy;
+}
 
 function startQuiz() {
   selectedTheme = themeSelect.value;
@@ -122,8 +134,11 @@ function startQuiz() {
 
   currentQuestionIndex = 0;
   score = 0;
+  userAnswers = [];
 
-  setText(totalQuestionsSpan, questions.length);
+  shuffledQuestions = shuffleQuestions(questions);
+  
+  setText(totalQuestionsSpan, shuffledQuestions.length);
 
   showQuestion();
 }
@@ -131,7 +146,8 @@ function startQuiz() {
 function showQuestion() {
   clearInterval(timerId);
 
-  const q = questions[currentQuestionIndex];
+  const q = shuffledQuestions[currentQuestionIndex];
+  
   setText(questionText, q.text);
   setText(currentQuestionIndexSpan, currentQuestionIndex + 1);
 
@@ -148,6 +164,14 @@ function showQuestion() {
     q.timeLimit,
     (timeLeft) => setText(timeLeftSpan, timeLeft),
     () => {
+     const q = shuffledQuestions[currentQuestionIndex];
+      userAnswers.push({
+        questionText: q.text,
+        userAnswerText: "Pas de réponse (temps écoulé)",
+        correctAnswerText: q.answers[q.correct],
+        isCorrect: false 
+      });
+      markCorrectAnswer(answersDiv, q.correct);
       lockAnswers(answersDiv);
       nextBtn.classList.remove("hidden");
     }
@@ -157,13 +181,23 @@ function showQuestion() {
 function selectAnswer(index, btn) {
   clearInterval(timerId);
 
-  const q = questions[currentQuestionIndex];
-  if (index === q.correct) {
+ const q = shuffledQuestions[currentQuestionIndex];
+  
+  const isCorrect = index === q.correct;
+  
+  if (isCorrect) {
     score++;
     btn.classList.add("correct");
   } else {
     btn.classList.add("wrong");
   }
+
+  userAnswers.push({
+    questionText: q.text,
+    userAnswerText: q.answers[index],
+    correctAnswerText: q.answers[q.correct],
+    isCorrect: isCorrect
+  });
 
   markCorrectAnswer(answersDiv, q.correct);
   lockAnswers(answersDiv);
@@ -172,7 +206,8 @@ function selectAnswer(index, btn) {
 
 function nextQuestion() {
   currentQuestionIndex++;
-  if (currentQuestionIndex < questions.length) {
+  
+  if (currentQuestionIndex < shuffledQuestions.length) {
     showQuestion();
   } else {
     endQuiz();
@@ -183,13 +218,45 @@ function endQuiz() {
   hideElement(questionScreen);
   showElement(resultScreen);
 
-  updateScoreDisplay(scoreText, score, questions.length);
+  updateScoreDisplay(scoreText, score, shuffledQuestions.length);
 
   if (score > bestScore) {
     bestScore = score;
     saveToLocalStorage("bestScore", bestScore);
   }
   setText(bestScoreEnd, bestScore);
+
+  showRecapTable();
+}
+
+function showRecapTable() {
+  recapTbody.innerHTML = "";
+  
+  userAnswers.forEach((answer) => {
+    const row = document.createElement("tr");
+    row.className = answer.isCorrect ? "recap-row-correct" : "recap-row-wrong";
+
+    const questionCell = document.createElement("td");
+    questionCell.textContent = answer.questionText;
+    row.appendChild(questionCell);
+
+    const userAnswerCell = document.createElement("td");
+    userAnswerCell.textContent = answer.userAnswerText;
+    userAnswerCell.className = answer.isCorrect ? "answer-correct" : "answer-wrong";
+    row.appendChild(userAnswerCell);
+
+    const correctAnswerCell = document.createElement("td");
+    correctAnswerCell.textContent = answer.correctAnswerText;
+    correctAnswerCell.className = "answer-correct";
+    row.appendChild(correctAnswerCell);
+
+    const resultCell = document.createElement("td");
+    resultCell.textContent = answer.isCorrect ? "✅" : "❌";
+    resultCell.className = "result-icon";
+    row.appendChild(resultCell);
+    
+    recapTbody.appendChild(row);
+  });
 }
 
 function restartQuiz() {
