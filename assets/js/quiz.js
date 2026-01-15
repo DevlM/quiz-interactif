@@ -83,6 +83,8 @@ let currentQuestionIndex = 0;
 let score = 0;
 let bestScore = loadFromLocalStorage("bestScore", 0);
 let timerId = null;
+let globalTimerId = null;
+let globalTimeLeft = 0;
 let userAnswers = [];
 let shuffledQuestions = [];
 
@@ -104,6 +106,7 @@ const restartBtn = getElement("#restart-btn");
 
 const scoreText = getElement("#score-text");
 const timeLeftSpan = getElement("#time-left");
+const globalTimeLeftSpan = getElement("#global-time-left");
 
 const currentQuestionIndexSpan = getElement("#current-question-index");
 const totalQuestionsSpan = getElement("#total-questions");
@@ -126,6 +129,8 @@ function shuffleQuestions(questionsArray) {
 }
 
 function startQuiz() {
+  clearInterval(globalTimerId);
+
   selectedTheme = themeSelect.value;
   questions = themes[selectedTheme];
 
@@ -139,6 +144,18 @@ function startQuiz() {
   shuffledQuestions = shuffleQuestions(questions);
   
   setText(totalQuestionsSpan, shuffledQuestions.length);
+
+  globalTimeLeft = 60; // Temps global de 60 secondes
+  setText(globalTimeLeftSpan, globalTimeLeft);
+
+  globalTimerId = setInterval(() => {
+    globalTimeLeft--;
+    setText(globalTimeLeftSpan, globalTimeLeft);
+    if (globalTimeLeft <= 0) {
+      clearInterval(globalTimerId);
+      endQuiz();
+    }
+  }, 1000);
 
   showQuestion();
 }
@@ -215,6 +232,9 @@ function nextQuestion() {
 }
 
 function endQuiz() {
+  clearInterval(globalTimerId);
+  clearInterval(timerId);
+
   hideElement(questionScreen);
   showElement(resultScreen);
 
@@ -260,6 +280,9 @@ function showRecapTable() {
 }
 
 function restartQuiz() {
+  clearInterval(globalTimerId);
+  clearInterval(timerId);
+
   hideElement(resultScreen);
   showElement(introScreen);
 
