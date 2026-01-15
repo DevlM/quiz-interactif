@@ -78,6 +78,7 @@ const themes = {
 
 let questions = [];
 let selectedTheme = "";
+let selectedMode = "";
 
 let currentQuestionIndex = 0;
 let score = 0;
@@ -87,6 +88,7 @@ let globalTimerId = null;
 let globalTimeLeft = 0;
 let userAnswers = [];
 let shuffledQuestions = [];
+let currentQuestion = null;
 
 // DOM Elements
 const introScreen = getElement("#intro-screen");
@@ -108,6 +110,7 @@ const endBtn = getElement("#end-btn");
 const scoreText = getElement("#score-text");
 const timeLeftSpan = getElement("#time-left");
 const globalTimeLeftSpan = getElement("#global-time-left");
+const globalTimerDiv = getElement("#global-timer-div");
 
 const currentQuestionIndexSpan = getElement("#current-question-index");
 const totalQuestionsSpan = getElement("#total-questions");
@@ -146,24 +149,30 @@ function startQuiz() {
   shuffledQuestions = shuffleQuestions(questions);
 
   const mode = getSelectedMode();
+  selectedMode = mode;
 
-  if (mode === "infinite") {
+  if (mode === "infinite" || mode === "contre-la-montre") {
     showElement(endBtn);
   }
   
   setText(totalQuestionsSpan, mode === "classic" ? shuffledQuestions.length : "Infini");
 
-  globalTimeLeft = 60; // Temps global de 60 secondes
-  setText(globalTimeLeftSpan, globalTimeLeft);
-
-  globalTimerId = setInterval(() => {
-    globalTimeLeft--;
+  if (mode === "contre-la-montre") {
+    showElement(globalTimerDiv);
+    globalTimeLeft = 60; // Temps global de 60 secondes
     setText(globalTimeLeftSpan, globalTimeLeft);
-    if (globalTimeLeft <= 0) {
-      clearInterval(globalTimerId);
-      endQuiz();
-    }
-  }, 1000);
+
+    globalTimerId = setInterval(() => {
+      globalTimeLeft--;
+      setText(globalTimeLeftSpan, globalTimeLeft);
+      if (globalTimeLeft <= 0) {
+        clearInterval(globalTimerId);
+        endQuiz();
+      }
+    }, 1000);
+  } else {
+    hideElement(globalTimerDiv);
+  }
 
   showQuestion();
 }
@@ -172,6 +181,7 @@ function showQuestion() {
   clearInterval(timerId);
  const mode = getSelectedMode();
   const q = shuffledQuestions[mode === "classic" ? currentQuestionIndex : Math.floor(Math.random() * shuffledQuestions.length)];
+  currentQuestion = q;
   
   setText(questionText, q.text);
   setText(currentQuestionIndexSpan, currentQuestionIndex + 1);
@@ -189,7 +199,7 @@ function showQuestion() {
     q.timeLimit,
     (timeLeft) => setText(timeLeftSpan, timeLeft),
     () => {
-     const q = shuffledQuestions[currentQuestionIndex];
+     const q = currentQuestion;
       userAnswers.push({
         questionText: q.text,
         userAnswerText: "Pas de réponse (temps écoulé)",
@@ -206,7 +216,7 @@ function showQuestion() {
 function selectAnswer(index, btn) {
   clearInterval(timerId);
 
- const q = shuffledQuestions[currentQuestionIndex];
+ const q = currentQuestion;
   
   const isCorrect = index === q.correct;
   
@@ -231,14 +241,16 @@ function selectAnswer(index, btn) {
 
 function nextQuestion() {
   const mode = getSelectedMode();
-  if (mode === "classic" && currentQuestionIndex < shuffledQuestions.length) {
-      currentQuestionIndex++;
-    showQuestion();
-  } else if (mode === "infinite") {
+  if (mode === "classic") {
+    currentQuestionIndex++;
+    if (currentQuestionIndex < shuffledQuestions.length) {
+      showQuestion();
+    } else {
+      endQuiz();
+    }
+  } else if (mode === "infinite" || mode === "contre-la-montre") {
     currentQuestionIndex = Math.floor(Math.random() * shuffledQuestions.length);
     showQuestion();
-  } else {
-    endQuiz();
   }
 }
 
@@ -249,7 +261,8 @@ function endQuiz() {
   hideElement(questionScreen);
   showElement(resultScreen);
 
-  updateScoreDisplay(scoreText, score, shuffledQuestions.length);
+  const total = selectedMode === "classic" ? shuffledQuestions.length : userAnswers.length;
+  updateScoreDisplay(scoreText, score, total);
 
   if (score > bestScore) {
     bestScore = score;
