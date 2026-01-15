@@ -153,15 +153,17 @@ function startQuiz() {
 
 function showQuestion() {
   clearInterval(timerId);
- const mode = getSelectedMode();
-  const q = shuffledQuestions[mode === "classic" ? currentQuestionIndex : Math.floor(Math.random() * shuffledQuestions.length)];
+  const mode = getSelectedMode();
+  
+  const questionIndex = mode === "classic" ? currentQuestionIndex : Math.floor(Math.random() * shuffledQuestions.length);
+  const q = shuffledQuestions[questionIndex];
   
   setText(questionText, q.text);
   setText(currentQuestionIndexSpan, currentQuestionIndex + 1);
 
   answersDiv.innerHTML = "";
   q.answers.forEach((answer, index) => {
-    const btn = createAnswerButton(answer, () => selectAnswer(index, btn));
+    const btn = createAnswerButton(answer, () => selectAnswer(index, btn, q));
     answersDiv.appendChild(btn);
   });
 
@@ -172,7 +174,6 @@ function showQuestion() {
     q.timeLimit,
     (timeLeft) => setText(timeLeftSpan, timeLeft),
     () => {
-     const q = shuffledQuestions[currentQuestionIndex];
       userAnswers.push({
         questionText: q.text,
         userAnswerText: "Pas de réponse (temps écoulé)",
@@ -186,10 +187,8 @@ function showQuestion() {
   );
 }
 
-function selectAnswer(index, btn) {
+function selectAnswer(index, btn, q) {
   clearInterval(timerId);
-
- const q = shuffledQuestions[currentQuestionIndex];
   
   const isCorrect = index === q.correct;
   
@@ -214,14 +213,16 @@ function selectAnswer(index, btn) {
 
 function nextQuestion() {
   const mode = getSelectedMode();
-  if (mode === "classic" && currentQuestionIndex < shuffledQuestions.length) {
-      currentQuestionIndex++;
-    showQuestion();
+  if (mode === "classic") {
+    currentQuestionIndex++;
+    if (currentQuestionIndex < shuffledQuestions.length) {
+      showQuestion();
+    } else {
+      endQuiz();
+    }
   } else if (mode === "infinite") {
-    currentQuestionIndex = Math.floor(Math.random() * shuffledQuestions.length);
+    currentQuestionIndex++;
     showQuestion();
-  } else {
-    endQuiz();
   }
 }
 
