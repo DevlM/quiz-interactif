@@ -52,6 +52,7 @@ const answersDiv = getElement("#answers");
 const nextBtn = getElement("#next-btn");
 const startBtn = getElement("#start-btn");
 const restartBtn = getElement("#restart-btn");
+const endBtn = getElement("#end-btn");
 
 const scoreText = getElement("#score-text");
 const timeLeftSpan = getElement("#time-left");
@@ -66,6 +67,7 @@ const recapTbody = getElement("#recap-tbody");
 startBtn.addEventListener("click", startQuiz);
 nextBtn.addEventListener("click", nextQuestion);
 restartBtn.addEventListener("click", restartQuiz);
+endBtn.addEventListener("click", endQuiz);
 
 setText(bestScoreValue, bestScore);
 
@@ -87,6 +89,10 @@ function startQuiz() {
   shuffledQuestions = shuffleQuestions(questions);
 
   const mode = getSelectedMode();
+
+  if (mode === "infinite") {
+    showElement(endBtn);
+  }
   
   setText(totalQuestionsSpan, mode === "classic" ? shuffledQuestions.length : "Infini");
 
