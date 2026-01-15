@@ -82,9 +82,17 @@ let selectedTheme = "";
 let currentQuestionIndex = 0;
 let score = 0;
 let bestScore = loadFromLocalStorage("bestScore", 0);
+let badgesUnlocked = loadFromLocalStorage("badgesUnlocked", []);
+let totalCorrectAnswers = loadFromLocalStorage("totalCorrectAnswers", 0);
 let timerId = null;
 let userAnswers = [];
 let shuffledQuestions = [];
+
+const badgesDefinitions = [
+  { id: "first_game", name: "Premier Pas", description: "Terminer votre premier quiz", icon: "🏁" },
+  { id: "perfect_score", name: "Sans Faute", description: "Obtenir 100% de bonnes réponses", icon: "🏆" },
+  { id: "ten_correct", name: "Expert", description: "Cumuler 10 bonnes réponses", icon: "🧠" }
+];
 
 // DOM Elements
 const introScreen = getElement("#intro-screen");
@@ -93,6 +101,7 @@ const resultScreen = getElement("#result-screen");
 
 const bestScoreValue = getElement("#best-score-value");
 const bestScoreEnd = getElement("#best-score-end");
+const badgesContainer = getElement("#badges-container");
 
 const themeSelect = getElement("#theme-select");
 
@@ -119,6 +128,7 @@ restartBtn.addEventListener("click", restartQuiz);
 endBtn.addEventListener("click", endQuiz);
 
 setText(bestScoreValue, bestScore);
+displayBadges();
 
 // Fonction pour mélanger les questions
 function shuffleQuestions(questionsArray) {
@@ -160,10 +170,14 @@ function showQuestion() {
   setText(currentQuestionIndexSpan, currentQuestionIndex + 1);
 
   answersDiv.innerHTML = "";
-  q.answers.forEach((answer, index) => {
-    const btn = createAnswerButton(answer, () => selectAnswer(index, btn));
+  let index = 0;
+  for (const answer of q.answers) {
+    // Capture index for the closure
+    const currentIndex = index;
+    const btn = createAnswerButton(answer, () => selectAnswer(currentIndex, btn));
     answersDiv.appendChild(btn);
-  });
+    index++;
+  }
 
   nextBtn.classList.add("hidden");
 
@@ -237,13 +251,70 @@ function endQuiz() {
   }
   setText(bestScoreEnd, bestScore);
 
+  // Mise à jour des stats globales
+  totalCorrectAnswers += score;
+  saveToLocalStorage("totalCorrectAnswers", totalCorrectAnswers);
+
+  checkBadges();
   showRecapTable();
+}
+
+function checkBadges() {
+  let newBadgeUnlocked = false;
+
+  for (const badge of badgesDefinitions) {
+    if (badgesUnlocked.includes(badge.id)) continue;
+
+    if (isBadgeConditionMet(badge.id)) {
+      badgesUnlocked.push(badge.id);
+      newBadgeUnlocked = true;
+      alert(`🎉 Bravo ! Vous avez débloqué le badge : ${badge.name}`);
+    }
+  }
+
+  if (newBadgeUnlocked) {
+    saveToLocalStorage("badgesUnlocked", badgesUnlocked);
+    displayBadges();
+  }
+}
+
+function isBadgeConditionMet(badgeId) {
+  if (badgeId === "first_game") {
+    return true; 
+  }
+  if (badgeId === "perfect_score") {
+    return score === shuffledQuestions.length && score > 0;
+  }
+  if (badgeId === "ten_correct") {
+    return totalCorrectAnswers >= 10;
+  }
+  return false;
+}
+
+function displayBadges() {
+  badgesContainer.innerHTML = "";
+  for (const badge of badgesDefinitions) {
+    const badgeEl = document.createElement("div");
+    badgeEl.className = "badge";
+    
+    if (badgesUnlocked.includes(badge.id)) {
+      badgeEl.classList.add("unlocked");
+      badgeEl.title = badge.description;
+      badgeEl.innerHTML = `<span>${badge.icon}</span> <p>${badge.name}</p>`;
+    } else {
+      badgeEl.classList.add("locked");
+      badgeEl.title = "???";
+      badgeEl.innerHTML = `<span>🔒</span> <p>???</p>`;
+    }
+    
+    badgesContainer.appendChild(badgeEl);
+  }
 }
 
 function showRecapTable() {
   recapTbody.innerHTML = "";
   
-  userAnswers.forEach((answer) => {
+  for (const answer of userAnswers) {
     const row = document.createElement("tr");
     row.className = answer.isCorrect ? "recap-row-correct" : "recap-row-wrong";
 
@@ -267,7 +338,7 @@ function showRecapTable() {
     row.appendChild(resultCell);
     
     recapTbody.appendChild(row);
-  });
+  }
 }
 
 function restartQuiz() {
@@ -275,6 +346,7 @@ function restartQuiz() {
   showElement(introScreen);
 
   setText(bestScoreValue, bestScore);
+  displayBadges();
 }
 
 const modeSelect = getElement("#mode-select");
