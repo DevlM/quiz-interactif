@@ -1,0 +1,26 @@
+{
+  "name": "quiz-interactif",
+  "version": "1.0.0",
+  "description": "Un quiz interactif en HTML/CSS/JS permettant : - Un **timer** par question, - Un **feedback** rouge/vert immédiat, - Une **barre de progression** (question X/Y), - Une **sauvegarde du meilleur score** en localStorage.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "sass": "sass assets/scss/main.scss assets/css/style.css",
+    "watch": "sass --watch assets/scss/main.scss assets/css/style.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DevlM/quiz-interactif.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/DevlM/quiz-interactif/issues"
+  },
+  "homepage": "https://github.com/DevlM/quiz-interactif#readme",
+  "devDependencies": {
+    "sass": "^1.97.2"
+  }
+}

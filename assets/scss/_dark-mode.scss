@@ -1,0 +1,73 @@
+@use 'variables' as *;
+
+.dark {
+  // --- 1. Règles générales (Fond et Texte) ---
+  color: $dark-text;
+  background-color: $dark-bg;
+
+  // --- 2. Écrans principaux ---
+  #intro-screen,
+  #question-screen,
+  #result-screen {
+    color: white;
+    background-color: $dark-card;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+  }
+
+  // --- 3. Boutons de réponse ---
+  #answers button {
+    color: white;
+    background-color: #444;
+    
+    &:hover {
+      background-color: #555;
+    }
+  }
+
+  // --- 4. Section Récapitulatif ---
+  #recap-section {
+    background-color: $dark-card;
+    border: 1px solid #444;
+
+    h3 {
+      color: #90caf9;
+    }
+  }
+
+  // --- 5. Tableau Récapitulatif ---
+  #recap-table {
+    background-color: $dark-card;
+    color: $dark-text;
+    box-shadow: none;
+    border: 1px solid #444;
+
+    th {
+      background-color: #0d47a1; 
+      color: white;
+    }
+
+    td {
+      border-bottom: 1px solid #555;
+      color: $dark-text;
+    }
+
+    // Lignes colorées 
+    .recap-row-correct {
+      background-color: rgba(46, 125, 50, 0.2);
+    }
+
+    .recap-row-wrong {
+      background-color: rgba(198, 40, 40, 0.2);
+    }
+
+    // Texte des réponses
+    .answer-correct {
+      color: #81c784; 
+    }
+
+    .answer-wrong {
+      color: #e57373; 
+    }
+  } 
+
+} 

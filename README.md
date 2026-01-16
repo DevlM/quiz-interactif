@@ -12,11 +12,16 @@ Un quiz interactif en HTML/CSS/JS permettant :
 2. Feedback visuel (vert/rouge).
 3. Indicateur de progression.
 4. Meilleur score stocké localement.
+5. Mélanger l’ordre des questions.
+6. Récapitulatif des erreurs.
+7. Mode multi-thème.
+8. Dark Mode.
+9. Mode contre la montre.
 
 ## Installation
 
 1. Cloner ce dépôt :
-`git clone https://github.com/votre-nom/quiz-dynamique.git`
+`git clone https://github.com/DevlM/quiz-interactif`
 
 2. Ouvrir `index.html` dans un navigateur.
 
@@ -29,9 +34,6 @@ Un quiz interactif en HTML/CSS/JS permettant :
 
 ## Améliorations possibles
 
-- Mélanger l’ordre des questions.
-- Récapitulatif des erreurs.
-- Mode multi-thème.
 - Etc.
 
 ## Workflow Git
@@ -43,3 +45,8 @@ Un quiz interactif en HTML/CSS/JS permettant :
 ## Auteurs
 
 Ce projet sert d’exemple pédagogique pour comprendre la structure d’une application web simple, sa documentation et son organisation agile (backlog, user stories) et Gitflow.
+## Version
+
+- Version : 1.0.0
+- Date : 16/01/2026
+- Équipe : groupe 1 ( les bras cassés)
