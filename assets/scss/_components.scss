@@ -1,114 +1,183 @@
 @use 'variables' as *;
-// Boutons génériques
-button {
-  margin: 10px auto;
-  padding: 10px 20px;
-  cursor: pointer;
-  background-color: $primary-color;
-  color: $bg-white;
-  border: none;
-  border-radius: 6px;
-  transition: background-color 0.3s;
-
-  &:hover {
-    background-color: $primary-hover;
-  }
-}
-
-// Menus déroulants (Select)
-select {
-  margin: 10px auto;
-  padding: 10px 20px;
-  background-color: $input-bg;
-  color: $text-dark;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-// Conteneurs (Intro, Question, Résultat)
-#intro-screen,
-#question-screen,
-#result-screen {
-  max-width: 600px;
-  margin: 0 auto 20px;
-  background: $bg-white;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-// Boutons de réponses
-#answers button {
-  display: block;
-  width: 60%;
-  margin: 8px auto;
-  background-color: $input-bg;
-  color: $text-dark;
-  border-radius: 4px;
-  transition: background-color 0.3s;
-
-  &:hover {
-    background-color: $badge-bg-locked; 
-  }
-}
-
-// États des réponses
-.correct { background-color: $success-bg !important; }
-.wrong { background-color: $error-bg !important; }
-
-// Indicateurs (Timer, Progress)
-#timer-div { margin-top: 10px; font-weight: bold; color: $timer-color; }
-#global-timer-div { margin-bottom: 10px; font-weight: bold; color: $global-timer-color; }
-#progress { font-weight: bold; margin-bottom: 10px; color: $progress-color; }
-
-// Texte de résultat
-#result-screen h2 { margin-bottom: 20px; color: $success-text; }
-#score-text { font-size: 1.2em; margin-bottom: 10px; }
 
 // Tableau récapitulatif
 #recap-section {
-  margin-top: 30px;
-  padding: 20px;
+  margin-top: $spacing-xl;
+  padding: $spacing-lg;
   background: $input-bg;
-  border-radius: 8px;
+  border-radius: $radius-lg;
+  animation: fadeIn 0.5s ease-out;
 
-  h3 { margin-bottom: 15px; color: $primary-color; text-align: center; }
+  h3 {
+    margin: 0 0 $spacing-lg 0;
+    color: $primary-color;
+    text-align: center;
+    font-size: 1.3rem;
+  }
+}
+
+.table-wrapper {
+  overflow-x: auto;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-md;
 }
 
 #recap-table {
-  width: 100%;
-  border-collapse: collapse;
-  background: white;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
+  width: 100% !important;
+  border-collapse: collapse !important;
+  background: $bg-white;
+  border-radius: $radius-lg;
   overflow: hidden;
-  table-layout: fixed;
+  font-size: 0.95rem;
+  table-layout: fixed !important; // 🔧 CRITICAL
 
-  thead { background: $primary-color; color: white; }
+  thead {
+    background: linear-gradient(135deg, $primary-color 0%, $primary-light 100%);
+    color: white;
 
-  th { padding: 12px; text-align: left; font-weight: 600; white-space: nowrap; }
-  
-  td {
-    padding: 15px 12px;
-    border-bottom: 1px solid $border-gray;
-    vertical-align: top;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
+    tr {
+      display: table-row !important;
+      width: 100% !important;
+    }
+
+    th {
+      padding: $spacing-md !important;
+      text-align: center !important;
+      font-weight: 700;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      vertical-align: middle;
+      box-sizing: border-box !important;
+      
+      &:nth-child(1) {
+        width: 40% !important;
+        min-width: 40% !important;
+        max-width: 40% !important;
+        text-align: left !important;
+        padding-left: $spacing-md !important;
+      }
+      
+      &:nth-child(2) {
+        width: 20% !important;
+        min-width: 20% !important;
+        max-width: 20% !important;
+      }
+      
+      &:nth-child(3) {
+        width: 20% !important;
+        min-width: 20% !important;
+        max-width: 20% !important;
+      }
+      
+      &:nth-child(4) {
+        width: 20% !important;
+        min-width: 20% !important;
+        max-width: 20% !important;
+      }
+    }
   }
 
-  tbody tr:last-child td { border-bottom: none; }
+  tbody {
+    tr {
+      display: table-row !important;
+      width: 100% !important;
+      transition: all $transition-base;
 
-  // Largeur des colonnes
-  th:nth-child(1), td:nth-child(1) { width: 33%; text-align: center; }
-  th:nth-child(2), td:nth-child(2) { width: 25%; text-align: center; }
-  th:nth-child(3), td:nth-child(3) { width: 23%; text-align: center; }
-  th:nth-child(4), td:nth-child(4) { width: 19%; text-align: center; }
+      &:hover {
+        background: rgba($primary-color, 0.03);
+      }
+    }
+
+    td {
+      padding: $spacing-md !important;
+      border-bottom: 1px solid $border-gray;
+      text-align: center !important;
+      vertical-align: middle;
+      font-size: 0.9rem;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      box-sizing: border-box !important;
+      
+      &:nth-child(1) {
+        width: 40% !important;
+        min-width: 40% !important;
+        max-width: 40% !important;
+        text-align: left !important;
+        padding-left: $spacing-md !important;
+        font-weight: 600;
+      }
+      
+      &:nth-child(2) {
+        width: 20% !important;
+        min-width: 20% !important;
+        max-width: 20% !important;
+      }
+      
+      &:nth-child(3) {
+        width: 20% !important;
+        min-width: 20% !important;
+        max-width: 20% !important;
+      }
+      
+      &:nth-child(4) {
+        width: 20% !important;
+        min-width: 20% !important;
+        max-width: 20% !important;
+      }
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+  }
 }
 
 // Lignes du tableau
-.recap-row-correct { background: #f1f8f4; }
-.recap-row-wrong { background: #fef5f5; }
-.answer-correct { color: $success-text; font-weight: 600; }
-.answer-wrong { color: $error-text; font-weight: 600; }
-.result-icon { text-align: center; font-size: 1.5em; }
+.recap-row-correct {
+  background: linear-gradient(90deg, rgba($success-bg, 0.3) 0%, rgba($success-bg, 0.1) 100%) !important;
+}
+
+.recap-row-wrong {
+  background: linear-gradient(90deg, rgba($error-bg, 0.3) 0%, rgba($error-bg, 0.1) 100%) !important;
+}
+
+.answer-correct {
+  color: $success-text;
+  font-weight: 700;
+  padding: $spacing-xs $spacing-sm;
+  background: rgba($success-bg, 0.5);
+  border-radius: $radius-sm;
+  display: inline-block;
+  font-size: 0.75rem;
+  max-width: 100%;
+  word-break: break-word;
+}
+
+.answer-wrong {
+  color: $error-text;
+  font-weight: 700;
+  padding: $spacing-xs $spacing-sm;
+  background: rgba($error-bg, 0.5);
+  border-radius: $radius-sm;
+  display: inline-block;
+  font-size: 0.75rem;
+  max-width: 100%;
+  word-break: break-word;
+}
+
+.result-icon {
+  font-size: 1.2rem;
+}
+
+// Responsive
+@media (max-width: $breakpoint-sm) {
+  #recap-table {
+    font-size: 0.75rem;
+
+    thead th,
+    tbody td {
+      padding: $spacing-xs !important;
+    }
+  }
+}

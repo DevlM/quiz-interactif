@@ -1,34 +1,78 @@
-// Couleurs Principales
-$primary-color: #1976d2;
-$primary-hover: #1565c0;
+// _variables.scss
+@use 'sass:color';
+
+// Couleurs principales
+$primary-color: #667eea;
+$primary-hover: #5a67d8;
+$primary-light: #818cf8;
+$primary-dark: #4338ca;
+
+// Couleurs secondaires
+$secondary-color: #f59e0b;
+$secondary-hover: #d97706;
 
 // Textes et Fonds
-$bg-light: #fafafa;
-$bg-white: #fff;
-$text-dark: #333;
-$text-gray: #555;
-$border-gray: #e0e0e0;
-$input-bg: #f5f5f5;
+$bg-light: #f8fafc;
+$bg-white: #ffffff;
+$text-dark: #1e293b;
+$text-gray: #64748b;
+$text-light: #94a3b8;
+$border-gray: #e2e8f0;
+$input-bg: #f1f5f9;
 
-// Feedback (Succès / Erreur)
-$success-bg: #c8e6c9;     
-$success-text: #2e7d32;    
-$error-bg: #ffcdd2;        
-$error-text: #c62828;      
+// Feedback
+$success-bg: #d1fae5;
+$success-text: #065f46;
+$success-border: #10b981;
+$error-bg: #fee2e2;
+$error-text: #991b1b;
+$error-border: #ef4444;
 
 // Timers
-$timer-color: #d32f2f;         
-$global-timer-color: #f57c00;  
-$progress-color: #455a64;
+$timer-color: #dc2626;
+$global-timer-color: #ea580c;
+$progress-color: #475569;
 
 // Badges
-$badge-bg-locked: #e0e0e0;
-$badge-bg-unlocked: #fff9c4;
-$badge-border: #fbc02d;
-$badge-section-bg: #f0f4c3;
-$badge-text-locked: #616161;
+$badge-bg-locked: #e2e8f0;
+$badge-bg-unlocked: #fef3c7;
+$badge-border: #f59e0b;
+$badge-section-bg: #fef9e7;
+$badge-text-locked: #64748b;
 
 // Dark Mode
-$dark-bg: #333;
-$dark-card: rgb(29, 29, 29);
-$dark-text: #fafafa;
+$dark-bg: #0f172a;
+$dark-card: #1e293b;
+$dark-text: #f1f5f9;
+$dark-border: #334155;
+
+// Espacements
+$spacing-xs: 0.5rem;   // 8px
+$spacing-sm: 0.75rem;  // 12px
+$spacing-md: 1rem;     // 16px
+$spacing-lg: 1.5rem;   // 24px
+$spacing-xl: 2rem;     // 32px
+$spacing-2xl: 3rem;    // 48px
+
+// Border radius
+$radius-sm: 0.375rem;  // 6px
+$radius-md: 0.5rem;    // 8px
+$radius-lg: 0.75rem;   // 12px
+$radius-xl: 1rem;      // 16px
+$radius-circle: 50%;
+
+// Ombres
+$shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+$shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+$shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+$shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+
+// Transitions
+$transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+$transition-base: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+$transition-slow: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+
+// Breakpoints
+$breakpoint-sm: 640px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;

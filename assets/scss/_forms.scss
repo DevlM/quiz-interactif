@@ -1,0 +1,76 @@
+@use 'variables' as *;
+
+.select-custom {
+  width: 100%;
+  padding: $spacing-md;
+  font-size: 1rem;
+  font-weight: 500;
+  color: $text-dark;
+  background: $bg-white;
+  border: 2px solid $border-gray;
+  border-radius: $radius-md;
+  cursor: pointer;
+  transition: all $transition-base;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23333' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right $spacing-md center;
+  padding-right: $spacing-2xl;
+
+  &:hover {
+    border-color: $primary-color;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: $primary-color;
+    box-shadow: 0 0 0 3px rgba($primary-color, 0.1);
+  }
+}
+
+// Answers grid
+.answers-grid {
+  display: grid;
+  gap: $spacing-md;
+  margin: $spacing-xl 0;
+
+  button {
+    width: 100%;
+    padding: $spacing-lg;
+    background: $bg-white;
+    border: 2px solid $border-gray;
+    border-radius: $radius-lg;
+    color: $text-dark;
+    font-size: 1rem;
+    font-weight: 500;
+    text-align: left;
+    transition: all $transition-base;
+    box-shadow: none;
+
+    &:hover:not(:disabled) {
+      border-color: $primary-color;
+      background: rgba($primary-color, 0.05);
+      transform: translateX(8px);
+    }
+
+    &.correct {
+      background: $success-bg !important;
+      border-color: $success-border !important;
+      color: $success-text !important;
+      animation: pulse 0.5s ease-in-out;
+    }
+
+    &.wrong {
+      background: $error-bg !important;
+      border-color: $error-border !important;
+      color: $error-text !important;
+      animation: shake 0.5s ease-in-out;
+    }
+
+    &:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      transform: none !important;
+    }
+  }
+}

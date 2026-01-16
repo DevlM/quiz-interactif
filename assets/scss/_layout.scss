@@ -1,0 +1,170 @@
+@use 'variables' as *;
+
+// Container principal
+.screen {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: $spacing-sm;
+  animation: fadeIn 0.5s ease-out;
+
+  @media (min-width: $breakpoint-md) {
+    padding: $spacing-md;
+  }
+}
+
+// Header fixe
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  padding: $spacing-lg $spacing-md;
+  margin: -20px -20px $spacing-xl -20px;
+  box-shadow: $shadow-sm;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  h1 {
+    margin: 0;
+    font-size: 1.75rem;
+    background: linear-gradient(135deg, $primary-color 0%, $primary-light 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
+
+// Cards
+.result-card {
+  max-width: 700px;
+  margin: 0 auto;
+}
+.welcome-card,
+.result-card {
+  background: $bg-white;
+  border-radius: $radius-lg;
+  padding: $spacing-md;
+  box-shadow: $shadow-lg;
+  animation: slideInFromTop 0.4s ease-out;
+}
+.question-card {
+  background: $bg-white;
+  border-radius: $radius-lg;
+  padding: $spacing-sm;
+  box-shadow: $shadow-lg;
+  animation: slideInFromTop 0.4s ease-out;
+  max-width: 450px;
+  margin: 0 auto;
+}
+
+.quiz-config {
+  display: grid;
+  gap: $spacing-md;
+  margin: $spacing-md 0;
+
+  @media (min-width: $breakpoint-md) {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.config-group {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+
+  label {
+    font-weight: 600;
+    color: $text-dark;
+    font-size: 0.95rem;
+  }
+}
+
+// Stats card
+.stats-card {
+  background: linear-gradient(135deg, $primary-color 0%, $primary-light 100%);
+  border-radius: $radius-lg;
+  padding: $spacing-md;
+  margin: $spacing-md 0;
+  color: white;
+  box-shadow: $shadow-md;
+
+  .stat-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .stat-label {
+    font-size: 0.9rem;
+    opacity: 0.9;
+  }
+
+  .stat-value {
+    font-size: 1.6rem;
+    font-weight: 700;
+  }
+}
+
+// Question content
+.question-content {
+  margin: $spacing-sm 0;
+  padding: $spacing-sm;
+  background: linear-gradient(135deg, rgba($primary-color, 0.05) 0%, rgba($primary-light, 0.05) 100%);
+  border-radius: $radius-md;
+  border-left: 4px solid $primary-color;
+}
+
+.question-title {
+  margin: 0;
+  font-size: 1.1rem;
+  color: $text-dark;
+  line-height: 1.4;
+}
+
+// Result header
+.result-header {
+  text-align: center;
+  margin-bottom: $spacing-md;
+
+  .result-icon {
+    font-size: 3rem;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  h2 {
+    margin: $spacing-xs 0 0;
+    font-size: 1.3rem;
+    color: $text-dark;
+  }
+}
+
+.score-display {
+  text-align: center;
+  margin-bottom: $spacing-md;
+
+  .score-main {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: $primary-color;
+    margin-bottom: $spacing-xs;
+  }
+
+  .score-best {
+    font-size: 0.9rem;
+    color: $text-gray;
+    padding: $spacing-xs $spacing-sm;
+    background: $input-bg;
+    border-radius: $radius-md;
+    display: inline-block;
+  }
+}
+
+// Actions
+.question-actions {
+  display: flex;
+  gap: $spacing-sm;
+  margin-top: $spacing-md;
+  justify-content: center;
+}

@@ -1,0 +1,116 @@
+@use 'variables' as *;
+
+// Base button
+button {
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: $spacing-md $spacing-xl;
+  border-radius: $radius-lg;
+  border: none;
+  cursor: pointer;
+  transition: all $transition-base;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-sm;
+  box-shadow: $shadow-sm;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: $shadow-md;
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none !important;
+  }
+}
+
+// Primary button
+.btn-primary {
+  background: linear-gradient(135deg, $primary-color 0%, $primary-light 100%);
+  color: white;
+
+  &:hover {
+    background: linear-gradient(135deg, $primary-hover 0%, $primary-color 100%);
+  }
+}
+
+// Secondary button
+.btn-secondary {
+  background: $input-bg;
+  color: $text-dark;
+
+  &:hover {
+    background: $border-gray;
+  }
+}
+
+// Large button
+.btn-large {
+  padding: $spacing-lg $spacing-2xl;
+  font-size: 1.1rem;
+  width: 100%;
+
+  @media (min-width: $breakpoint-md) {
+    width: auto;
+  }
+}
+
+// Button icon
+.btn-icon {
+  font-size: 1.2em;
+}
+
+// Dark mode toggle
+.dark-mode-toggle {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  border-radius: $radius-circle;
+  background: linear-gradient(135deg, $secondary-color 0%, $secondary-hover 100%);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  overflow: hidden;
+  transition: all $transition-base;
+
+  &:hover {
+    transform: rotate(20deg) scale(1.05);
+  }
+
+  .icon-sun,
+  .icon-moon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.5rem;
+    transition: all $transition-base;
+  }
+
+  .icon-moon {
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(180deg);
+  }
+}
+
+body.dark .dark-mode-toggle {
+  background: linear-gradient(135deg, $primary-color 0%, $primary-light 100%);
+
+  .icon-sun {
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(-180deg);
+  }
+
+  .icon-moon {
+    opacity: 1;
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+}

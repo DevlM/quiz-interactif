@@ -1,73 +1,201 @@
 @use 'variables' as *;
+@use 'sass:color';
 
-.dark {
-  // --- 1. Règles générales (Fond et Texte) ---
+body.dark {
+  background: $dark-bg;
   color: $dark-text;
-  background-color: $dark-bg;
 
-  // --- 2. Écrans principaux ---
-  #intro-screen,
-  #question-screen,
-  #result-screen {
-    color: white;
-    background-color: $dark-card;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-  }
+  // Header
+  .header {
+    background: rgba($dark-card, 0.95);
+    border-bottom: 1px solid $dark-border;
 
-  // --- 3. Boutons de réponse ---
-  #answers button {
-    color: white;
-    background-color: #444;
-    
-    &:hover {
-      background-color: #555;
+    h1 {
+      background: linear-gradient(135deg, $primary-light 0%, color.adjust($primary-light, $lightness: 10%) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
   }
 
-  // --- 4. Section Récapitulatif ---
-  #recap-section {
-    background-color: $dark-card;
-    border: 1px solid #444;
+  // Cards
+  .welcome-card,
+  .question-card,
+  .result-card {
+    background: $dark-card;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  }
+
+  // Config
+  .config-group label {
+    color: $dark-text;
+  }
+
+
+  select,
+  .select-custom,
+  #theme-select,
+  #mode-select {
+    background: color.adjust($dark-card, $lightness: 5%) !important;
+    border-color: $dark-border !important;
+    color: $dark-text !important;
+background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23f1f5f9' d='M6 9L1 4h10z'/%3E%3C/svg%3E") !important;
+background-repeat: no-repeat !important;
+background-position: right 1rem center !important;
+
+// TAILLE DE LA FLÈCHE
+background-size: 12px !important;
+
+    &:hover,
+    &:focus {
+      border-color: $primary-light !important;
+    }
+
+    // Options du select
+    option {
+      background: color.adjust($dark-card, $lightness: 5%);
+      color: $dark-text;
+    }
+  }
+
+  // Question content
+  .question-content {
+    background: linear-gradient(135deg, rgba($primary-light, 0.1) 0%, rgba($primary-light, 0.05) 100%);
+    border-left-color: $primary-light;
+  }
+
+  .question-title {
+    color: $dark-text;
+  }
+
+  // Answers
+  .answers-grid button {
+    background: color.adjust($dark-card, $lightness: 5%);
+    border-color: $dark-border;
+    color: $dark-text;
+
+    &:hover:not(:disabled) {
+      border-color: $primary-light;
+      background: rgba($primary-light, 0.1);
+    }
+  }
+
+  // Score display
+  .score-display {
+    .score-main {
+      color: $primary-light;
+    }
+
+    .score-best {
+      background: color.adjust($dark-card, $lightness: 5%);
+      color: $dark-text;
+    }
+  }
+
+  // Progress
+  .progress-info {
+    color: $text-light;
+
+    span {
+      color: $primary-light;
+    }
+  }
+
+  .progress-bar-container {
+    background: color.adjust($dark-card, $lightness: 5%);
+  }
+
+  // Timer
+  .timer-global {
+    background: linear-gradient(135deg, rgba($global-timer-color, 0.15) 0%, rgba($global-timer-color, 0.08) 100%);
+    border-color: rgba($global-timer-color, 0.4);
+  }
+
+  .timer-bg {
+    stroke: $dark-border;
+  }
+
+  .timer-progress {
+    stroke: $primary-light;
+  }
+
+  .timer-text {
+    color: $primary-light;
+  }
+
+  // Badges
+  #badges-section {
+    background: linear-gradient(135deg, rgba($badge-section-bg, 0.1) 0%, rgba($badge-section-bg, 0.05) 100%);
+    border-color: rgba($badge-border, 0.2);
 
     h3 {
-      color: #90caf9;
+      color: $dark-text;
     }
   }
 
-  // --- 5. Tableau Récapitulatif ---
-  #recap-table {
-    background-color: $dark-card;
-    color: $dark-text;
-    box-shadow: none;
-    border: 1px solid #444;
+  .badge {
+    background: color.adjust($dark-card, $lightness: 5%);
+    color: $text-light;
 
-    th {
-      background-color: #0d47a1; 
-      color: white;
+    &.unlocked {
+      background: linear-gradient(135deg, color.adjust($badge-bg-unlocked, $lightness: -10%) 0%, color.adjust($badge-bg-unlocked, $lightness: -5%) 100%);
+    }
+  }
+
+  // Recap
+  #recap-section {
+    background: color.adjust($dark-card, $lightness: 3%);
+  }
+
+  #recap-table {
+    background: $dark-card;
+
+    thead {
+      background: linear-gradient(135deg, color.adjust($primary-color, $lightness: -10%) 0%, $primary-color 100%);
     }
 
-    td {
-      border-bottom: 1px solid #555;
+    tbody td {
+      border-bottom-color: $dark-border;
       color: $dark-text;
     }
 
-    // Lignes colorées 
-    .recap-row-correct {
-      background-color: rgba(46, 125, 50, 0.2);
+    tbody tr:hover {
+      background: color.adjust($dark-card, $lightness: 5%);
     }
+  .answer-correct {
+  color: color.adjust($success-text, $lightness: 20%);
+  background: rgba($success-text, 0.2);
+}
 
-    .recap-row-wrong {
-      background-color: rgba(198, 40, 40, 0.2);
+.answer-wrong {
+  color: color.adjust($error-text, $lightness: 20%);
+  background: rgba($error-text, 0.2);
+}
+  }
+
+  .recap-row-correct {
+    background: linear-gradient(90deg, rgba($success-text, 0.15) 0%, rgba($success-text, 0.05) 100%);
+  }
+
+  .recap-row-wrong {
+    background: linear-gradient(90deg, rgba($error-text, 0.15) 0%, rgba($error-text, 0.05) 100%);
+  }
+
+  .answer-correct {
+    background: rgba($success-text, 0.2);
+  }
+
+  .answer-wrong {
+    background: rgba($error-text, 0.2);
+  }
+
+  // Buttons
+  .btn-secondary {
+    background: color.adjust($dark-card, $lightness: 10%);
+    color: $dark-text;
+
+    &:hover {
+      background: color.adjust($dark-card, $lightness: 15%);
     }
-
-    // Texte des réponses
-    .answer-correct {
-      color: #81c784; 
-    }
-
-    .answer-wrong {
-      color: #e57373; 
-    }
-  } 
-
-} 
+  }
+}

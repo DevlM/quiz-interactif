@@ -1,4 +1,12 @@
+@use 'variables' as *;
+
+@use 'animations';
 @use 'base';
-@use 'components';
+@use 'layout';
+@use 'buttons';
+@use 'forms';
+@use 'timer';
+@use 'progress';
 @use 'badges';
-@use 'dark-mode'
+@use 'components';
+@use 'dark-mode';
