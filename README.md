@@ -15,8 +15,8 @@ Un quiz interactif en HTML/CSS/JS permettant :
 5. Mélanger l’ordre des questions.
 6. Récapitulatif des erreurs.
 7. Mode multi-thème.
-8. Dark Mode
-
+8. Dark Mode.
+9. Mode contre la montre.
 
 ## Installation
 
@@ -45,3 +45,8 @@ Un quiz interactif en HTML/CSS/JS permettant :
 ## Auteurs
 
 Ce projet sert d’exemple pédagogique pour comprendre la structure d’une application web simple, sa documentation et son organisation agile (backlog, user stories) et Gitflow.
+## Version
+
+- Version : 1.0.0
+- Date : 16/01/2026
+- Équipe : groupe 1 ( les bras cassés)
