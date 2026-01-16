@@ -1,0 +1,104 @@
+@use 'variables' as *;
+
+// Timer global (contre la montre)
+.timer-global {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-xs;
+  padding: $spacing-xs $spacing-sm;
+  background: linear-gradient(135deg, rgba($global-timer-color, 0.1) 0%, rgba($global-timer-color, 0.05) 100%);
+  border: 2px solid rgba($global-timer-color, 0.3);
+  border-radius: $radius-sm;
+  margin-bottom: $spacing-md;
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: $global-timer-color;
+  animation: fadeIn 0.5s ease-out;
+
+  .timer-icon {
+    font-size: 1rem;
+  }
+
+  .timer-value {
+    font-size: 1.1rem;
+    min-width: 2ch;
+    text-align: center;
+    font-weight: 700;
+  }
+}
+
+// Timer question (circulaire) - ULTRA COMPACT
+.timer-question {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: $spacing-sm 0;
+}
+
+.timer-circle {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0; // 🔧 Empêche le rétrécissement
+}
+
+.timer-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.timer-bg {
+  fill: none;
+  stroke: $border-gray;
+  stroke-width: 3;
+}
+
+.timer-progress {
+  fill: none;
+  stroke: $primary-color;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: 283;
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 1s linear;
+}
+
+.timer-text {
+  position: relative;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: $primary-color;
+  z-index: 10; // 🔧 Au-dessus de tout
+  pointer-events: none; // 🔧 N'intercepte pas les clics
+}
+
+// Animation quand le temps est faible
+.timer-circle.warning {
+  .timer-progress {
+    stroke: $global-timer-color;
+  }
+
+  .timer-text {
+    color: $global-timer-color;
+    animation: pulse 1s ease-in-out infinite;
+  }
+}
+
+.timer-circle.danger {
+  .timer-progress {
+    stroke: $timer-color;
+  }
+
+  .timer-text {
+    color: $timer-color;
+    animation: pulse 0.5s ease-in-out infinite;
+  }
+}

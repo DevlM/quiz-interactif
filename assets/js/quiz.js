@@ -130,6 +130,10 @@ const totalQuestionsSpan = getElement("#total-questions");
 const recapSection = getElement("#recap-section");
 const recapTbody = getElement("#recap-tbody");
 
+const progressBar = getElement("#progress-bar");
+const timerCircle = getElement("#timer-circle");
+const timerCircleWrapper = getElement("#timer-circle-wrapper");
+
 // Init
 startBtn.addEventListener("click", startQuiz);
 nextBtn.addEventListener("click", nextQuestion);
@@ -147,6 +151,40 @@ function shuffleQuestions(questionsArray) {
   return copy;
 }
 
+function updateProgressBar() {
+  const mode = getSelectedMode();
+  
+  if (mode === "classic") {
+    // Mode classic : pourcentage basé sur currentQuestionIndex
+    const progress = ((currentQuestionIndex + 1) / shuffledQuestions.length) * 100;
+    progressBar.style.width = progress + "%";
+  } else {
+    // Mode infini : animation continue (reset tous les 10)
+    const progress = ((currentQuestionIndex % 10) + 1) * 10;
+    progressBar.style.width = progress + "%";
+  }
+}
+
+function updateTimerCircle(timeLeft, timeLimit) {
+  const circumference = 2 * Math.PI * 45; // 283
+  const progress = timeLeft / timeLimit;
+  const offset = circumference * (1 - progress);
+  
+  timerCircle.style.strokeDashoffset = offset;
+  
+  // Changer la couleur selon le temps restant
+  if (timeLeft <= 3) {
+    timerCircleWrapper.classList.add("danger");
+    timerCircleWrapper.classList.remove("warning");
+  } else if (timeLeft <= 5) {
+    timerCircleWrapper.classList.add("warning");
+    timerCircleWrapper.classList.remove("danger");
+  } else {
+    timerCircleWrapper.classList.remove("warning", "danger");
+  }
+}
+
+
 function startQuiz() {
   clearInterval(globalTimerId);
 
@@ -159,6 +197,8 @@ function startQuiz() {
   currentQuestionIndex = 0;
   score = 0;
   userAnswers = [];
+
+  progressBar.style.width = "0%";
 
   shuffledQuestions = shuffleQuestions(questions);
 
@@ -201,6 +241,8 @@ function showQuestion() {
   setText(questionText, q.text);
   setText(currentQuestionIndexSpan, currentQuestionIndex + 1);
 
+  updateProgressBar();
+
   answersDiv.innerHTML = "";
 
   q.answers.forEach((answer, index) => {
@@ -211,10 +253,19 @@ function showQuestion() {
 
   nextBtn.classList.add("hidden");
 
-  timeLeftSpan.textContent = q.timeLimit;
+   const timeLimit = q.timeLimit;
+  timerCircle.style.strokeDasharray = "283";
+  timerCircle.style.strokeDashoffset = "0";
+  timerCircleWrapper.classList.remove("warning", "danger");
+
+timeLeftSpan.textContent = timeLimit;
   timerId = startTimer(
-    q.timeLimit,
-    (timeLeft) => setText(timeLeftSpan, timeLeft),
+    timeLimit,
+    (timeLeft) => {
+      setText(timeLeftSpan, timeLeft);
+      // 🆕 Animer le cercle
+      updateTimerCircle(timeLeft, timeLimit);
+    },
     () => {
       userAnswers.push({
         questionText: q.text,
@@ -346,7 +397,7 @@ function displayBadges() {
 
 function showRecapTable() {
   recapTbody.innerHTML = "";
-  
+
   for (const answer of userAnswers) {
     const row = document.createElement("tr");
     row.className = answer.isCorrect ? "recap-row-correct" : "recap-row-wrong";
@@ -356,13 +407,17 @@ function showRecapTable() {
     row.appendChild(questionCell);
 
     const userAnswerCell = document.createElement("td");
-    userAnswerCell.textContent = answer.userAnswerText;
-    userAnswerCell.className = answer.isCorrect ? "answer-correct" : "answer-wrong";
+    const userAnswerSpan = document.createElement("span");
+    userAnswerSpan.textContent = answer.userAnswerText;
+    userAnswerSpan.className = answer.isCorrect ? "answer-correct" : "answer-wrong";
+    userAnswerCell.appendChild(userAnswerSpan);
     row.appendChild(userAnswerCell);
 
     const correctAnswerCell = document.createElement("td");
-    correctAnswerCell.textContent = answer.correctAnswerText;
-    correctAnswerCell.className = "answer-correct";
+    const correctAnswerSpan = document.createElement("span");
+    correctAnswerSpan.textContent = answer.correctAnswerText;
+    correctAnswerSpan.className = "answer-correct";
+    correctAnswerCell.appendChild(correctAnswerSpan);
     row.appendChild(correctAnswerCell);
 
     const resultCell = document.createElement("td");

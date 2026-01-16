@@ -1,42 +1,114 @@
 @use 'variables' as *;
+@use 'sass:color'; 
 
 #badges-section {
-  margin-top: 20px;
-  padding: 10px;
-  background: $badge-section-bg;
-  border-radius: 8px;
+  margin: $spacing-xl 0;
+  padding: $spacing-xl;
+  background: linear-gradient(135deg, $badge-section-bg 0%, rgba($badge-section-bg, 0.5) 100%);
+  border-radius: $radius-xl;
+  border: 2px solid rgba($badge-border, 0.2);
+
+  h3 {
+    margin: 0 0 $spacing-lg 0;
+    text-align: center;
+    font-size: 1.3rem;
+    color: $text-dark;
+  }
 }
 
 #badges-container {
   display: flex;
   justify-content: center;
-  gap: 15px;
+  gap: $spacing-lg;
   flex-wrap: wrap;
-  margin-top: 10px;
 }
 
 .badge {
-  width: 80px;
-  height: 80px;
+  width: 90px;
+  height: 90px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border-radius: 50%;
+  border-radius: $radius-circle;
   background: $badge-bg-locked;
   color: $badge-text-locked;
-  font-size: 0.8em;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  transition: transform 0.2s;
+  font-size: 0.75rem;
+  box-shadow: $shadow-md;
+  transition: all $transition-base;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
 
-  &.unlocked {
-    background: $badge-bg-unlocked;
-    color: $text-dark;
-    border: 2px solid $badge-border;
+  &::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+      45deg,
+      transparent,
+      rgba(255, 255, 255, 0.1),
+      transparent
+    );
+    transform: rotate(45deg);
+    transition: all 0.5s;
   }
 
-  span { font-size: 1.5em; display: block; }
-  p { margin: 2px 0 0 0; font-weight: bold; }
+  &:hover::before {
+    left: 100%;
+  }
 
-  &:hover { transform: scale(1.1); }
+  span {
+    font-size: 2rem;
+    display: block;
+    margin-bottom: $spacing-xs;
+    filter: grayscale(1);
+    transition: filter $transition-base;
+  }
+
+  p {
+    margin: 0;
+    font-weight: 700;
+    text-align: center;
+  }
+
+  &.unlocked {
+    background: linear-gradient(135deg, $badge-bg-unlocked 0%, color.adjust($badge-bg-unlocked, $lightness: 5%) 100%);
+    color: $text-dark;
+    border: 3px solid $badge-border;
+    box-shadow: $shadow-lg, 0 0 20px rgba($badge-border, 0.3);
+    animation: badgeUnlock 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+    span {
+      filter: grayscale(0);
+    }
+
+    &:hover {
+      transform: scale(1.15) rotate(5deg);
+    }
+  }
+
+  &.locked {
+    &:hover {
+      transform: scale(1.05);
+      background: color.adjust($badge-bg-locked, $lightness: -5%);
+    }
+  }
+}
+
+@keyframes badgeUnlock {
+  0% {
+    transform: scale(0) rotate(-180deg);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2) rotate(10deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
 }
