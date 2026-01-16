@@ -16,6 +16,10 @@ h1 {
   color: #555;
 }
 
+.hidden {
+  display: none;
+}
+
 button {
   margin: 10px auto;
   padding: 10px 20px;
@@ -26,13 +30,18 @@ button {
   border-radius: 6px;
   transition: background-color 0.3s;
 }
-
 button:hover {
   background-color: #1565c0;
 }
 
-.hidden {
-  display: none;
+select {
+  margin: 10px auto;
+  padding: 10px 20px;
+  background-color: #f5f5f5;
+  color: #333;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
 }
 
 #intro-screen,
@@ -55,23 +64,28 @@ button:hover {
   border-radius: 4px;
   transition: background-color 0.3s;
 }
-
 #answers button:hover {
   background-color: #e0e0e0;
 }
 
 .correct {
-  background-color: #c8e6c9 !important; /* vert clair */
+  background-color: #c8e6c9 !important;
 }
 
 .wrong {
-  background-color: #ffcdd2 !important; /* rouge clair */
+  background-color: #ffcdd2 !important;
 }
 
 #timer-div {
   margin-top: 10px;
   font-weight: bold;
-  color: #d32f2f; /* rouge foncé */
+  color: #d32f2f;
+}
+
+#global-timer-div {
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: #f57c00;
 }
 
 #progress {
@@ -82,7 +96,7 @@ button:hover {
 
 #result-screen h2 {
   margin-bottom: 20px;
-  color: #2e7d32; /* vert foncé */
+  color: #2e7d32;
 }
 
 #score-text {
@@ -96,7 +110,6 @@ button:hover {
   background: #f5f5f5;
   border-radius: 8px;
 }
-
 #recap-section h3 {
   margin-bottom: 15px;
   color: #1976d2;
@@ -112,54 +125,43 @@ button:hover {
   overflow: hidden;
   table-layout: fixed;
 }
-
 #recap-table thead {
   background: #1976d2;
   color: white;
 }
-
 #recap-table th {
   padding: 12px;
   text-align: left;
   font-weight: 600;
   white-space: nowrap;
 }
-
 #recap-table td {
- padding: 15px 12px;
+  padding: 15px 12px;
   border-bottom: 1px solid #e0e0e0;
   vertical-align: top;
   word-wrap: break-word;
   overflow-wrap: break-word;
 }
-
 #recap-table tbody tr:last-child td {
   border-bottom: none;
 }
-
-#recap-table th:nth-child(1),
-#recap-table td:nth-child(1) {
+#recap-table th:nth-child(1), #recap-table td:nth-child(1) {
   width: 33%;
   text-align: center;
 }
-
-#recap-table th:nth-child(2),
-#recap-table td:nth-child(2) {
-  width: 25%; 
+#recap-table th:nth-child(2), #recap-table td:nth-child(2) {
+  width: 25%;
+  text-align: center;
+}
+#recap-table th:nth-child(3), #recap-table td:nth-child(3) {
+  width: 23%;
+  text-align: center;
+}
+#recap-table th:nth-child(4), #recap-table td:nth-child(4) {
+  width: 19%;
   text-align: center;
 }
 
-#recap-table th:nth-child(3),
-#recap-table td:nth-child(3) {
-  width: 23%; 
-  text-align: center;
-}
-
-#recap-table th:nth-child(4),
-#recap-table td:nth-child(4) {
-  width: 19%; 
-  text-align: center;
-}
 .recap-row-correct {
   background: #f1f8f4;
 }
@@ -182,3 +184,103 @@ button:hover {
   text-align: center;
   font-size: 1.5em;
 }
+
+#badges-section {
+  margin-top: 20px;
+  padding: 10px;
+  background: #f0f4c3;
+  border-radius: 8px;
+}
+
+#badges-container {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.badge {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #e0e0e0;
+  color: #616161;
+  font-size: 0.8em;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+.badge.unlocked {
+  background: #fff9c4;
+  color: #333;
+  border: 2px solid #fbc02d;
+}
+.badge span {
+  font-size: 1.5em;
+  display: block;
+}
+.badge p {
+  margin: 2px 0 0 0;
+  font-weight: bold;
+}
+.badge:hover {
+  transform: scale(1.1);
+}
+
+.dark {
+  color: #fafafa;
+  background-color: #333;
+}
+.dark #intro-screen,
+.dark #question-screen,
+.dark #result-screen {
+  color: white;
+  background-color: rgb(29, 29, 29);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+.dark #answers button {
+  color: white;
+  background-color: #444;
+}
+.dark #answers button:hover {
+  background-color: #555;
+}
+.dark #recap-section {
+  background-color: rgb(29, 29, 29);
+  border: 1px solid #444;
+}
+.dark #recap-section h3 {
+  color: #90caf9;
+}
+.dark #recap-table {
+  background-color: rgb(29, 29, 29);
+  color: #fafafa;
+  box-shadow: none;
+  border: 1px solid #444;
+}
+.dark #recap-table th {
+  background-color: #0d47a1;
+  color: white;
+}
+.dark #recap-table td {
+  border-bottom: 1px solid #555;
+  color: #fafafa;
+}
+.dark #recap-table .recap-row-correct {
+  background-color: rgba(46, 125, 50, 0.2);
+}
+.dark #recap-table .recap-row-wrong {
+  background-color: rgba(198, 40, 40, 0.2);
+}
+.dark #recap-table .answer-correct {
+  color: #81c784;
+}
+.dark #recap-table .answer-wrong {
+  color: #e57373;
+}
+
+/*# sourceMappingURL=style.css.map */
