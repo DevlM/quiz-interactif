@@ -1,0 +1,460 @@
+{
+  "maths": [
+    {
+      "text": "Combien font 2 + 3 ?",
+      "answers": ["3", "4", "5", "1"],
+      "correct": 2,
+      "timeLimit": 5
+    },
+    {
+      "text": "Quelle est la racine carrée de 16 ?",
+      "answers": ["2", "4", "8", "16"],
+      "correct": 1,
+      "timeLimit": 10
+    },
+    {
+      "text": "Combien font 7 × 8 ?",
+      "answers": ["54", "56", "64", "48"],
+      "correct": 1,
+      "timeLimit": 8
+    },
+    {
+      "text": "Quel est le résultat de 100 ÷ 4 ?",
+      "answers": ["20", "25", "30", "15"],
+      "correct": 1,
+      "timeLimit": 8
+    },
+    {
+      "text": "Combien font 15 - 8 ?",
+      "answers": ["6", "7", "8", "5"],
+      "correct": 1,
+      "timeLimit": 5
+    },
+    {
+      "text": "Quelle est la valeur de π (pi) arrondie à 2 décimales ?",
+      "answers": ["3.12", "3.14", "3.16", "3.18"],
+      "correct": 1,
+      "timeLimit": 10
+    },
+    {
+      "text": "Combien font 12² (12 au carré) ?",
+      "answers": ["124", "144", "164", "184"],
+      "correct": 1,
+      "timeLimit": 12
+    },
+    {
+      "text": "Quel est le périmètre d'un carré de 5 cm de côté ?",
+      "answers": ["10 cm", "15 cm", "20 cm", "25 cm"],
+      "correct": 2,
+      "timeLimit": 10
+    },
+    {
+      "text": "Combien font 3/4 + 1/4 ?",
+      "answers": ["1/2", "2/4", "1", "4/8"],
+      "correct": 2,
+      "timeLimit": 12
+    },
+    {
+      "text": "Quelle est la racine cubique de 27 ?",
+      "answers": ["2", "3", "4", "9"],
+      "correct": 1,
+      "timeLimit": 12
+    },
+    {
+      "text": "Combien font 50% de 80 ?",
+      "answers": ["30", "35", "40", "45"],
+      "correct": 2,
+      "timeLimit": 8
+    },
+    {
+      "text": "Quel est le nombre premier suivant après 7 ?",
+      "answers": ["8", "9", "10", "11"],
+      "correct": 3,
+      "timeLimit": 10
+    },
+    {
+      "text": "Combien d'angles a un triangle ?",
+      "answers": ["2", "3", "4", "5"],
+      "correct": 1,
+      "timeLimit": 5
+    },
+    {
+      "text": "Quelle est la somme des angles d'un triangle ?",
+      "answers": ["90°", "180°", "270°", "360°"],
+      "correct": 1,
+      "timeLimit": 12
+    },
+    {
+      "text": "Combien font 2³ (2 puissance 3) ?",
+      "answers": ["6", "8", "9", "12"],
+      "correct": 1,
+      "timeLimit": 10
+    }
+  ],
+  "culture-generale": [
+    {
+      "text": "Quelle est la capitale de la France ?",
+      "answers": ["Marseille", "Paris", "Lyon", "Bordeaux"],
+      "correct": 1,
+      "timeLimit": 10
+    },
+    {
+      "text": "Quel est le plus grand océan du monde ?",
+      "answers": ["Atlantique", "Indien", "Arctique", "Pacifique"],
+      "correct": 3,
+      "timeLimit": 15
+    },
+    {
+      "text": "Combien y a-t-il de continents sur Terre ?",
+      "answers": ["5", "6", "7", "8"],
+      "correct": 2,
+      "timeLimit": 10
+    },
+    {
+      "text": "Quel est le plus haut sommet du monde ?",
+      "answers": ["K2", "Mont Blanc", "Everest", "Kilimandjaro"],
+      "correct": 2,
+      "timeLimit": 12
+    },
+    {
+      "text": "Quelle est la capitale de l'Italie ?",
+      "answers": ["Milan", "Rome", "Naples", "Venise"],
+      "correct": 1,
+      "timeLimit": 10
+    },
+    {
+      "text": "Dans quel pays se trouve la Tour Eiffel ?",
+      "answers": ["Belgique", "Suisse", "France", "Luxembourg"],
+      "correct": 2,
+      "timeLimit": 8
+    },
+    {
+      "text": "Quel est le symbole chimique de l'or ?",
+      "answers": ["Or", "Au", "Ag", "Fe"],
+      "correct": 1,
+      "timeLimit": 12
+    },
+    {
+      "text": "Combien de jours compte une année bissextile ?",
+      "answers": ["364", "365", "366", "367"],
+      "correct": 2,
+      "timeLimit": 10
+    },
+    {
+      "text": "Quel est le plus grand désert du monde ?",
+      "answers": ["Sahara", "Gobi", "Antarctique", "Arabie"],
+      "correct": 2,
+      "timeLimit": 15
+    },
+    {
+      "text": "Quelle planète est surnommée la planète rouge ?",
+      "answers": ["Vénus", "Mars", "Jupiter", "Saturne"],
+      "correct": 1,
+      "timeLimit": 10
+    },
+    {
+      "text": "Combien de pattes a une araignée ?",
+      "answers": ["6", "8", "10", "12"],
+      "correct": 1,
+      "timeLimit": 8
+    },
+    {
+      "text": "Quel est le plus long fleuve du monde ?",
+      "answers": ["Nil", "Amazone", "Yangtsé", "Mississippi"],
+      "correct": 1,
+      "timeLimit": 15
+    },
+    {
+      "text": "Dans quel pays se trouve la Grande Muraille ?",
+      "answers": ["Japon", "Chine", "Corée", "Mongolie"],
+      "correct": 1,
+      "timeLimit": 10
+    },
+    {
+      "text": "Quel est l'animal terrestre le plus rapide ?",
+      "answers": ["Lion", "Guépard", "Gazelle", "Léopard"],
+      "correct": 1,
+      "timeLimit": 12
+    },
+    {
+      "text": "Combien de couleurs y a-t-il dans un arc-en-ciel ?",
+      "answers": ["5", "6", "7", "8"],
+      "correct": 2,
+      "timeLimit": 10
+    },
+    {
+      "text": "Quelle est la capitale de l'Espagne ?",
+      "answers": ["Barcelone", "Madrid", "Séville", "Valence"],
+      "correct": 1,
+      "timeLimit": 10
+    },
+    {
+      "text": "Quel océan borde l'ouest de l'Afrique ?",
+      "answers": ["Pacifique", "Indien", "Atlantique", "Arctique"],
+      "correct": 2,
+      "timeLimit": 12
+    },
+    {
+      "text": "Quel est le plus petit pays du monde ?",
+      "answers": ["Monaco", "Vatican", "Saint-Marin", "Liechtenstein"],
+      "correct": 1,
+      "timeLimit": 15
+    },
+    {
+      "text": "Combien de secondes y a-t-il dans une heure ?",
+      "answers": ["3000", "3200", "3400", "3600"],
+      "correct": 3,
+      "timeLimit": 12
+    },
+    {
+      "text": "Quel gaz respirons-nous principalement ?",
+      "answers": ["Oxygène", "Azote", "CO2", "Hydrogène"],
+      "correct": 1,
+      "timeLimit": 10
+    }
+  ],
+  "français": [
+    {
+      "text": "Comment conjugue-t-on le verbe avoir au futur (je) ?",
+      "answers": ["j'aurai", "j'aie", "j'ai", "j'aura"],
+      "correct": 0,
+      "timeLimit": 10
+    },
+    {
+      "text": "Comment conjugue-t-on le verbe être au futur (je) ?",
+      "answers": ["je serai", "je sois", "je suis", "j'être"],
+      "correct": 0,
+      "timeLimit": 10
+    },
+    {
+      "text": "Quel est le pluriel de 'cheval' ?",
+      "answers": ["chevals", "chevaux", "chevaus", "chevale"],
+      "correct": 1,
+      "timeLimit": 10
+    },
+    {
+      "text": "Quel est le féminin de 'directeur' ?",
+      "answers": ["directeure", "directrice", "directoresse", "directeuse"],
+      "correct": 1,
+      "timeLimit": 10
+    },
+    {
+      "text": "Comment s'écrit 'vingt et un' ?",
+      "answers": ["21", "vingt-et-un", "vingt et un", "vingts et un"],
+      "correct": 2,
+      "timeLimit": 12
+    },
+    {
+      "text": "Quel est le participe passé du verbe 'faire' ?",
+      "answers": ["fais", "fait", "faite", "faire"],
+      "correct": 1,
+      "timeLimit": 10
+    },
+    {
+      "text": "Combien y a-t-il de lettres dans l'alphabet français ?",
+      "answers": ["24", "25", "26", "27"],
+      "correct": 2,
+      "timeLimit": 8
+    },
+    {
+      "text": "Quel est l'antonyme de 'grand' ?",
+      "answers": ["gros", "large", "petit", "mince"],
+      "correct": 2,
+      "timeLimit": 8
+    },
+    {
+      "text": "Comment s'écrit 'peut-être' ?",
+      "answers": ["peutêtre", "peut être", "peut-être", "peûtêtre"],
+      "correct": 2,
+      "timeLimit": 10
+    },
+    {
+      "text": "Quel est le synonyme de 'maison' ?",
+      "answers": ["appartement", "demeure", "chambre", "pièce"],
+      "correct": 1,
+      "timeLimit": 10
+    },
+    {
+      "text": "Comment conjugue-t-on 'aller' au présent (je) ?",
+      "answers": ["je alle", "je vais", "je va", "j'aille"],
+      "correct": 1,
+      "timeLimit": 10
+    },
+    {
+      "text": "Quel est le pluriel de 'œil' ?",
+      "answers": ["œils", "yeux", "œux", "œilles"],
+      "correct": 1,
+      "timeLimit": 12
+    },
+    {
+      "text": "Quelle phrase est correctement écrite ?",
+      "answers": ["Il sont partis", "Ils sont parti", "Ils sont partis", "Il son partis"],
+      "correct": 2,
+      "timeLimit": 12
+    },
+    {
+      "text": "Quel mot est un adverbe ?",
+      "answers": ["vite", "vitesse", "rapide", "rapidité"],
+      "correct": 0,
+      "timeLimit": 12
+    },
+    {
+      "text": "Comment s'accorde 'tout' dans 'elles sont ___ contentes' ?",
+      "answers": ["tout", "tous", "toute", "toutes"],
+      "correct": 3,
+      "timeLimit": 15
+    },
+    {
+      "text": "Quel est le genre du mot 'automobile' ?",
+      "answers": ["masculin", "féminin", "neutre", "les deux"],
+      "correct": 1,
+      "timeLimit": 10
+    },
+    {
+      "text": "Comment s'écrit le son 'o' dans 'beau' ?",
+      "answers": ["o", "au", "eau", "ô"],
+      "correct": 2,
+      "timeLimit": 10
+    },
+    {
+      "text": "Quel est le COD dans 'Je mange une pomme' ?",
+      "answers": ["Je", "mange", "une pomme", "pomme"],
+      "correct": 2,
+      "timeLimit": 15
+    },
+    {
+      "text": "Comment conjugue-t-on 'prendre' au présent (ils) ?",
+      "answers": ["ils prendent", "ils prenent", "ils prennent", "ils prendrent"],
+      "correct": 2,
+      "timeLimit": 12
+    },
+    {
+      "text": "Quel est le superlatif de 'bon' ?",
+      "answers": ["meilleur", "le meilleur", "plus bon", "le plus bon"],
+      "correct": 1,
+      "timeLimit": 12
+    }
+  ],
+  "histoire": [
+    {
+      "text": "Quelle est la date de la Révolution française ?",
+      "answers": ["1789", "1791", "1793", "1795"],
+      "correct": 0,
+      "timeLimit": 10
+    },
+    {
+      "text": "Quel est le nom du roi soleil ?",
+      "answers": ["Louis XIV", "Louis XV", "Louis XVI", "Napoléon"],
+      "correct": 0,
+      "timeLimit": 10
+    },
+    {
+      "text": "En quelle année a eu lieu la chute du mur de Berlin ?",
+      "answers": ["1987", "1988", "1989", "1990"],
+      "correct": 2,
+      "timeLimit": 12
+    },
+    {
+      "text": "Qui a découvert l'Amérique en 1492 ?",
+      "answers": ["Magellan", "Vasco de Gama", "Christophe Colomb", "Marco Polo"],
+      "correct": 2,
+      "timeLimit": 12
+    },
+    {
+      "text": "Quelle guerre a duré de 1914 à 1918 ?",
+      "answers": ["Guerre de Cent Ans", "Première Guerre mondiale", "Seconde Guerre mondiale", "Guerre de Trente Ans"],
+      "correct": 1,
+      "timeLimit": 10
+    },
+    {
+      "text": "Quel pharaon égyptien avait un tombeau dans la Vallée des Rois ?",
+      "answers": ["Ramsès II", "Toutânkhamon", "Cléopâtre", "Khéops"],
+      "correct": 1,
+      "timeLimit": 15
+    },
+    {
+      "text": "En quelle année l'homme a-t-il marché sur la Lune ?",
+      "answers": ["1967", "1968", "1969", "1970"],
+      "correct": 2,
+      "timeLimit": 12
+    },
+    {
+      "text": "Qui était le premier empereur romain ?",
+      "answers": ["Jules César", "Auguste", "Néron", "Caligula"],
+      "correct": 1,
+      "timeLimit": 15
+    },
+    {
+      "text": "Quelle bataille a marqué la fin de Napoléon ?",
+      "answers": ["Austerlitz", "Waterloo", "Iéna", "Wagram"],
+      "correct": 1,
+      "timeLimit": 12
+    },
+    {
+      "text": "En quelle année a commencé la Seconde Guerre mondiale ?",
+      "answers": ["1937", "1938", "1939", "1940"],
+      "correct": 2,
+      "timeLimit": 10
+    },
+    {
+      "text": "Quel roi de France a été guillotiné ?",
+      "answers": ["Louis XIV", "Louis XV", "Louis XVI", "Louis XVII"],
+      "correct": 2,
+      "timeLimit": 12
+    },
+    {
+      "text": "Qui a peint la Joconde ?",
+      "answers": ["Michel-Ange", "Raphaël", "Léonard de Vinci", "Donatello"],
+      "correct": 2,
+      "timeLimit": 10
+    },
+    {
+      "text": "Quelle civilisation a construit le Machu Picchu ?",
+      "answers": ["Aztèques", "Mayas", "Incas", "Toltèques"],
+      "correct": 2,
+      "timeLimit": 15
+    },
+    {
+      "text": "En quelle année l'esclavage a-t-il été aboli en France ?",
+      "answers": ["1794", "1848", "1865", "1900"],
+      "correct": 1,
+      "timeLimit": 15
+    },
+    {
+      "text": "Qui était Jeanne d'Arc ?",
+      "answers": ["Une reine", "Une guerrière", "Une sainte", "Toutes ces réponses"],
+      "correct": 3,
+      "timeLimit": 12
+    },
+    {
+      "text": "Quel empire était dirigé par Jules César ?",
+      "answers": ["Empire grec", "Empire romain", "Empire byzantin", "Empire ottoman"],
+      "correct": 1,
+      "timeLimit": 10
+    },
+    {
+      "text": "Quelle guerre a opposé le Nord et le Sud des États-Unis ?",
+      "answers": ["Guerre d'Indépendance", "Guerre de Sécession", "Guerre hispano-américaine", "Guerre du Vietnam"],
+      "correct": 1,
+      "timeLimit": 15
+    },
+    {
+      "text": "Quel monument parisien a été construit pour l'Exposition universelle de 1889 ?",
+      "answers": ["Arc de Triomphe", "Tour Eiffel", "Sacré-Cœur", "Notre-Dame"],
+      "correct": 1,
+      "timeLimit": 12
+    },
+    {
+      "text": "Qui était le chef nazi pendant la Seconde Guerre mondiale ?",
+      "answers": ["Mussolini", "Staline", "Hitler", "Franco"],
+      "correct": 2,
+      "timeLimit": 10
+    },
+    {
+      "text": "En quelle année a eu lieu la prise de la Bastille ?",
+      "answers": ["1788", "1789", "1790", "1791"],
+      "correct": 1,
+      "timeLimit": 10
+    }
+  ]
+}

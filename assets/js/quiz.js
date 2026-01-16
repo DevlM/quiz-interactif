@@ -21,68 +21,35 @@ import {
 
 console.log("Quiz JS loaded...");
 
-const themes = {
-  "maths": [
-    {
-      text: "Combien font 2 + 3 ?",
-      answers: ["3", "4", "5", "1"],
-      correct: 2,
-      timeLimit: 5,
-    },
-    {
-      text: "Quelle est la racine carrée de 16 ?",
-      answers: ["2", "4", "8", "16"],
-      correct: 1,
-      timeLimit: 10,
-    },
-  ],
-  "culture-generale": [
-    {
-      text: "Quelle est la capitale de la France ?",
-      answers: ["Marseille", "Paris", "Lyon", "Bordeaux"],
-      correct: 1,
-      timeLimit: 10,
-    },
-    {
-      text: "Quel est le plus grand océan du monde ?",
-      answers: ["Atlantique", "Indien", "Arctique", "Pacifique"],
-      correct: 3,
-      timeLimit: 15,
-    },
-  ],
-  "français": [
-    {
-      text: "Comment est conjuger le verbe avoir au futur ?",
-      answers: ["aurai", "aie", "ai", "a"],
-      correct: 0,
-      timeLimit: 10,
-    },
-    {
-      text: "Comment est conjuger le verbe être au futur ?",
-      answers: ["serai", "sois", "suis", "être"],
-      correct: 0,
-      timeLimit: 15,
-    },
-  ],
-  "histoire": [
-    {
-      text: "Quelle est la date de la Révolution française ?",
-      answers: ["1789", "1791", "1793", "1795"],
-      correct: 0,
-      timeLimit: 10,
-    },
-    {
-      text: "Quel est le nom du roi soleil ?",
-      answers: ["Louis XIV", "Louis XV", "Louis XVI", "Napoleon"],
-      correct: 0,
-      timeLimit: 15,
-    },
-  ],
-};
-
+let themes = {};
 let questions = [];
 let selectedTheme = "";
 let selectedMode = "";
+
+// Charger les questions depuis le fichier JSON
+async function loadQuestions() {
+  try {
+    const response = await fetch('../assets/data/questions.json');
+    themes = await response.json();
+    console.log("Questions chargées avec succès !");
+  } catch (error) {
+    console.error("Erreur lors du chargement des questions:", error);
+    // Questions de secours en cas d'erreur
+    themes = {
+      "maths": [
+        {
+          text: "Combien font 2 + 3 ?",
+          answers: ["3", "4", "5", "1"],
+          correct: 2,
+          timeLimit: 5,
+        }
+      ]
+    };
+  }
+}
+
+// Initialiser les questions au chargement de la page
+loadQuestions();
 
 let currentQuestionIndex = 0;
 let score = 0;
@@ -185,11 +152,22 @@ function updateTimerCircle(timeLeft, timeLimit) {
 }
 
 
-function startQuiz() {
+async function startQuiz() {
   clearInterval(globalTimerId);
+
+  // Attendre que les questions soient chargées
+  if (Object.keys(themes).length === 0) {
+    await loadQuestions();
+  }
 
   selectedTheme = themeSelect.value;
   questions = themes[selectedTheme];
+
+  // Vérifier que le thème existe
+  if (!questions || questions.length === 0) {
+    alert("Erreur: Aucune question disponible pour ce thème.");
+    return;
+  }
 
   hideElement(introScreen);
   showElement(questionScreen);
@@ -213,7 +191,7 @@ function startQuiz() {
 
   if (mode === "contre-la-montre") {
     showElement(globalTimerDiv);
-    globalTimeLeft = 60; 
+    globalTimeLeft = 60;
     setText(globalTimeLeftSpan, globalTimeLeft);
 
     globalTimerId = setInterval(() => {
